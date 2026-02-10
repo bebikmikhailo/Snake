@@ -1,0 +1,14 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#canvas {
+    width: 600px;
+    height: 600px;
+    background-color: lightblue;
+    box-shadow: 4px 4px black;
+}
