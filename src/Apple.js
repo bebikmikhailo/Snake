@@ -1,4 +1,5 @@
 import { Food } from './Food.js';
+import { CELL_SIZE } from './script.js';
 
 export class Apple extends Food{
     constructor(segment, radius = 5) {
@@ -9,7 +10,7 @@ export class Apple extends Food{
     draw(context) {
         context.beginPath();
         context.fillStyle = "red";
-        context.arc(this.segment.x, this.segment.y, this.radius, 0, 2 * Math.PI);
+        context.arc(this.segment.x + (CELL_SIZE / 2), this.segment.y + (CELL_SIZE / 2), this.radius, 0, 2 * Math.PI);
         context.fill();
     }
 

@@ -17,24 +17,26 @@ export const CELL_SIZE = 25; //25
 const game = new Game();
 
 let lastTime = 0;
-let timer = 0;
 let interval = 140;
 
 function animation(timeStamp = 0) {
     const deltaTime = timeStamp - lastTime;
     lastTime = timeStamp;
-    timer += deltaTime;
 
-    if (timer > interval) {
-        game.update();    
-        timer = 0;
+    if (game.isRun) {
+        game.timer += deltaTime;
+        if (game.timer > interval) {
+            game.update();    
+            game.timer = 0;
+        }
     }
 
-    const progress = timer / interval;
+    const progress = (interval === 0) ? 0 : game.timer / interval;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, MAP_WIDTH, MAP_HEIGHT);
     game.drawBackground(ctx);
     game.draw(ctx, progress);
+
     requestAnimationFrame(animation);
 }
 

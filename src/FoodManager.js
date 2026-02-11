@@ -29,7 +29,7 @@ export class FoodManager {
     generateFood(foodType) {
         while (!this.isEnoughFoodOnMap()) {
             const foodSegment = Segment.getRandomSegment(MAP_WIDTH, MAP_HEIGHT, CELL_SIZE);
-            if (!this.game.snake.isColidesWithSnake(foodSegment)) {
+            if (!this.game.snake.isColidesWithSnake(foodSegment) && !this.isSegmentColideFood(foodSegment)) {
                 switch(foodType) {
                     case "Apple":
                         this.food.push(new Apple(foodSegment));
@@ -42,6 +42,25 @@ export class FoodManager {
 
     isEnoughFoodOnMap() {
         return this.food.length === this.foodLimit;
+    }
+
+
+    // I use to ckeck is new food has free segment to spawn
+    isSegmentColideFood(segment) {
+        return this.food.some(seg => {
+            return Segment.isSegmentsColide(seg.segment, segment);
+        });
+    }
+
+
+    // I use to ckeck weather the snake ate food, if it is the food deletes
+    isFoodEaten(segment) {
+        this.food.forEach(food => {
+            if (Segment.isSegmentsColide(segment, food.segment)) {
+                const foodIndex = this.food.indexOf(food);
+                this.food.splice(foodIndex, 1);
+            }
+        })
     }
 
 }

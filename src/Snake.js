@@ -13,8 +13,8 @@ export class Snake {
         this.xSpeed = 0;
         this.ySpeed = 0;
         this.color = "yellow";
-        this.body = [new Segment(x, y), new Segment(0, CELL_SIZE)];
-        this.moveDirection = "none";
+        this.body = [new Segment(x, y), new Segment(0, CELL_SIZE), new Segment(0, 0)];
+        this.moveDirection = "None";
         this.moveProgress = 0;
     }
 
@@ -36,6 +36,10 @@ export class Snake {
         this.body[0].x += this.xSpeed;
         this.body[0].y += this.ySpeed;
 
+        // this.body[0] is snake's head and I check weather snake's head colides with food
+        this.game.foodManager.isFoodEaten(this.body[0]);
+
+
 
         this.checkColisionWithMap();
     }
@@ -54,10 +58,9 @@ export class Snake {
     }
 
     checkColisionWithMap() {
-
         this.body.forEach(segment => {
             if ((segment.x + this.width > MAP_WIDTH || segment.x < 0) || (segment.y + this.height > MAP_HEIGHT || segment.y < 0)) {
-                this.game.reset();
+                this.game.restart();
             }
         })
     }
@@ -86,11 +89,8 @@ export class Snake {
     }
 
     isColidesWithSnake(segment) {
-        this.body.forEach(seg => {
-            if (seg.x === segment.x && seg.y === segment.y) {
-                return true;
-            }
-        })
-        return false;
+        return this.body.some(seg => {
+            return Segment.isSegmentsColide(seg, segment);
+        }); 
     }
 }

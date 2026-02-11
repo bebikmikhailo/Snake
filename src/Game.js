@@ -13,11 +13,14 @@ export class Game {
         this.snake = new Snake(CELL_SIZE, CELL_SIZE, this);
         this.listner = new IventListner(this);
         this.foodManager = new FoodManager(this);
+        this.timer = 0; // game timer
         this.lastKeyPressed = "";
+        this.isRun = false;
     }
 
     update() {
         this.snake.update();
+        if (!this.isRun) return; // to prevent last frame food spawn when game is restarted;
         this.foodManager.update();
     }
 
@@ -42,8 +45,15 @@ export class Game {
         }
     }
 
-    reset() {
+    start() {
+        this.isRun = true;
+    }
+
+    restart() {
+        this.isRun = false;
         this.snake = new Snake(CELL_SIZE, CELL_SIZE, this);
+        this.foodManager = new FoodManager(this);
+        this.timer = 0;
         this.lastKeyPressed = "";
     }
 }

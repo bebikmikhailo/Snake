@@ -9,8 +9,12 @@ export class Segment {
     }
 
     static getRandomSegment(width, height, cellSize) {
-        const x = (Math.floor(Math.random() * (width / cellSize)) * cellSize) + (CELL_SIZE / 2);
-        const y = (Math.floor(Math.random() * (height / cellSize)) * cellSize) + (CELL_SIZE / 2);
+        const x = Math.floor(Math.random() * (width / cellSize)) * cellSize;
+        const y = Math.floor(Math.random() * (height / cellSize)) * cellSize;
         return new Segment(x, y);
+    }
+
+    static isSegmentsColide(segment1, segment2) {
+        return (segment1.x === segment2.x && segment1.y === segment2.y);
     }
 }
