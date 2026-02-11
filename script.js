@@ -36,8 +36,8 @@ class Game {
         this.snake.update();
     }
 
-    draw(context) {
-        this.snake.draw(context);
+    draw(context, progress) {
+        this.snake.draw(context, progress);
     }
 
     drawBackground() {
@@ -67,8 +67,11 @@ class Segment {
     constructor(x, y) {
         this.x = x;
         this.y = y;
+        this.oldX = x;
+        this.oldY = y;
     }
 }
+
 
 
 class Snake {
@@ -82,15 +85,21 @@ class Snake {
         this.color = "yellow";
         this.body = [new Segment(x, y), new Segment(0, cell)];
         this.moveDirection = "none";
+        this.moveProgress = 0;
     }
 
     update() {
         this.chooseMoveDirection();
 
-        for (let i = 0; i < this.body.length - 1; i++) {
-            this.body[i + 1].x = this.body[i].x;
-            this.body[i + 1].y = this.body[i].y;
+        for (let i = this.body.length - 1; i > 0; i--) {
+            this.body[i].oldX = this.body[i].x;
+            this.body[i].oldY = this.body[i].y;
+            this.body[i].x = this.body[i - 1].x;
+            this.body[i].y = this.body[i - 1].y;
         }
+
+        this.body[0].oldX = this.body[0].x;
+        this.body[0].oldY = this.body[0].y;
         this.body[0].x += this.xSpeed;
         this.body[0].y += this.ySpeed;
 
@@ -98,11 +107,15 @@ class Snake {
         this.checkColisionWithMap();
     }
 
-    draw(context) {
+    draw(context, progress) {
         context.fillStyle = this.color;
         this.body.forEach(segment => {
+
+            const renderX = segment.oldX + (segment.x - segment.oldX) * progress;
+            const renderY = segment.oldY + (segment.y - segment.oldY) * progress;
+
             context.beginPath();
-            context.roundRect(segment.x, segment.y, this.width, this.height, 10);
+            context.roundRect(renderX, renderY, this.width, this.height, 10);
             context.fill();
         });
     }
@@ -145,7 +158,7 @@ const game = new Game();
 
 let lastTime = 0;
 let timer = 0;
-let interval = 200;
+let interval = 140;
 
 function animation(timeStamp = 0) {
     const deltaTime = timeStamp - lastTime;
@@ -157,9 +170,11 @@ function animation(timeStamp = 0) {
         timer = 0;
     }
 
+    const progress = timer / interval;
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     game.drawBackground();
-    game.draw(ctx);
+    game.draw(ctx, progress);
     requestAnimationFrame(animation);
 }
 
