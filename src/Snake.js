@@ -1,89 +1,19 @@
-const canvas = document.getElementById("canvas");
-
-canvas.width = 425; // 425
-canvas.height = 375; // 375
-const cell = 25; //25
-
-const ctx = canvas.getContext("2d");
+import { Segment } from './Segment.js';
+import { MAP_WIDTH } from './script.js';
+import { MAP_HEIGHT } from './script.js';
+import { CELL_SIZE } from './script.js';
 
 
-
-
-
-
-
-
-
-
-class InventListner {
-    constructor(game) {
-        this.game = game;
-        window.addEventListener("keydown", (ev) => {
-          this.game.lastKeyPressed = ev.key;
-        })
-    }
-}
-
-
-class Game {
-    constructor() {
-        this.snake = new Snake(cell, cell, this);
-        this.listner = new InventListner(this);
-        this.lastKeyPressed = "";
-    }
-
-    update() {
-        this.snake.update();
-    }
-
-    draw(context, progress) {
-        this.snake.draw(context, progress);
-    }
-
-    drawBackground() {
-        let swtch = false;
-        let y = 0;
-        for (let j = 0; j < canvas.height / cell; j++) {
-            let x = 0;
-            for (let i = 0; i < canvas.width / cell; i++) {
-                ctx.fillStyle = (swtch) ? "blue" : "lightblue";
-                ctx.fillRect(x, y, cell, cell);
-                swtch = !swtch;
-                x += cell;
-            }
-            y += cell;
-            // swtch = !swtch;
-        }
-    }
-
-    reset() {
-        this.snake = new Snake(cell, cell, this);
-        this.lastKeyPressed = "";
-    }
-}
-
-
-class Segment {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-        this.oldX = x;
-        this.oldY = y;
-    }
-}
-
-
-
-class Snake {
+export class Snake {
     constructor(x, y, game) {
         this.game = game;
         this.height = 25;
         this.width = 25;
-        this.speed = cell;
+        this.speed = CELL_SIZE;
         this.xSpeed = 0;
         this.ySpeed = 0;
         this.color = "yellow";
-        this.body = [new Segment(x, y), new Segment(0, cell)];
+        this.body = [new Segment(x, y), new Segment(0, CELL_SIZE)];
         this.moveDirection = "none";
         this.moveProgress = 0;
     }
@@ -91,6 +21,8 @@ class Snake {
     update() {
         this.chooseMoveDirection();
 
+
+        // body
         for (let i = this.body.length - 1; i > 0; i--) {
             this.body[i].oldX = this.body[i].x;
             this.body[i].oldY = this.body[i].y;
@@ -98,6 +30,7 @@ class Snake {
             this.body[i].y = this.body[i - 1].y;
         }
 
+        // head
         this.body[0].oldX = this.body[0].x;
         this.body[0].oldY = this.body[0].y;
         this.body[0].x += this.xSpeed;
@@ -123,7 +56,7 @@ class Snake {
     checkColisionWithMap() {
 
         this.body.forEach(segment => {
-            if ((segment.x + this.width > canvas.width || segment.x < 0) || (segment.y + this.height > canvas.height || segment.y < 0)) {
+            if ((segment.x + this.width > MAP_WIDTH || segment.x < 0) || (segment.y + this.height > MAP_HEIGHT || segment.y < 0)) {
                 this.game.reset();
             }
         })
@@ -151,31 +84,13 @@ class Snake {
             this.ySpeed = 0;
         }
     }
-}
 
-
-const game = new Game();
-
-let lastTime = 0;
-let timer = 0;
-let interval = 140;
-
-function animation(timeStamp = 0) {
-    const deltaTime = timeStamp - lastTime;
-    lastTime = timeStamp;
-    timer += deltaTime;
-
-    if (timer > interval) {
-        game.update();    
-        timer = 0;
+    isColidesWithSnake(segment) {
+        this.body.forEach(seg => {
+            if (seg.x === segment.x && seg.y === segment.y) {
+                return true;
+            }
+        })
+        return false;
     }
-
-    const progress = timer / interval;
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    game.drawBackground();
-    game.draw(ctx, progress);
-    requestAnimationFrame(animation);
 }
-
-animation();
