@@ -27,12 +27,12 @@ export class FoodManager {
 
 
     generateFood(foodType) {
-        while (!this.isEnoughFoodOnMap()) {
+        while (!this.isEnoughFoodOnMap() && this.game.board.hasAvailableSpace()) {
             const foodSegment = Segment.getRandomSegment(MAP_WIDTH, MAP_HEIGHT, CELL_SIZE);
             if (!this.game.snake.isColidesWithSnake(foodSegment) && !this.isSegmentColideFood(foodSegment)) {
                 switch(foodType) {
                     case "Apple":
-                        this.food.push(new Apple(foodSegment));
+                        this.food.push(new Apple(foodSegment, 0.22));
                         break;
                 }
             }

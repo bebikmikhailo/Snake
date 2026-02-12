@@ -7,8 +7,8 @@ body {
 
 
 #canvas {
-    width: 600px;
-    height: 600px;
+    width: 425px;
+    height: 425px;
     background-color: #0096FF;
     box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.2);
 }

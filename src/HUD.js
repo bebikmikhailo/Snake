@@ -12,7 +12,7 @@ export class HUD {
         context.font = "24px Arial";
         context.fillText(`${this.game.score}`, 40, -14); // 50 -15 
 
-        const apple = new Apple(new Segment(7.5, -35), 10); // 7.5 -15
+        const apple = new Apple(new Segment(7.5, -35), 0.25); // 7.5 -15
         apple.draw(context);
     }
 }

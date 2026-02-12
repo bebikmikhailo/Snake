@@ -1,4 +1,5 @@
 // classes
+import { Board } from './Board.js';
 import { Snake } from './Snake.js';
 import { IventListner } from './IventListner.js';
 import { FoodManager } from './FoodManager.js';
@@ -6,8 +7,6 @@ import { HUD } from './HUD.js';
 //
 
 // constants
-import { MAP_WIDTH } from './script.js';
-import { MAP_HEIGHT } from './script.js';
 import { CELL_SIZE } from './script.js';
 import { INTERVAL } from './script.js';
 //
@@ -16,6 +15,7 @@ import { INTERVAL } from './script.js';
 
 export class Game {
     constructor() {
+        this.board = new Board(this);
         this.snake = new Snake(CELL_SIZE, CELL_SIZE, this);
         this.listner = new IventListner(this);
         this.foodManager = new FoodManager(this);
@@ -23,7 +23,6 @@ export class Game {
         this.score = 0; // game score
         this.timer = 0; // game timer
         this.interval = INTERVAL;
-        this.lastKeyPressed = "";
         this.isRun = false;
     }
 
@@ -34,28 +33,10 @@ export class Game {
     }
 
     draw(context, progress) {
+        this.board.draw(context);
         this.snake.draw(context, progress);
         this.hud.draw(context);
         this.foodManager.draw(context);
-    }
-
-    drawBackground(context) {
-        let isOdd = ((MAP_WIDTH / CELL_SIZE) % 2 === 0);
-        let swtch = false;
-        let y = 0;
-        for (let j = 0; j < MAP_HEIGHT / CELL_SIZE; j++) {
-            let x = 0;
-            for (let i = 0; i < MAP_WIDTH / CELL_SIZE; i++) {
-                context.fillStyle = (swtch) ? "#A7D2FF" : "#87C1FF";
-                context.fillRect(x, y, CELL_SIZE, CELL_SIZE);
-                swtch = !swtch;
-                x += CELL_SIZE;
-            }
-            y += CELL_SIZE;
-            if (isOdd) {
-                swtch = !swtch;
-            }
-        }
     }
 
     start() {
@@ -63,13 +44,13 @@ export class Game {
     }
 
     restart() {
-        this.isRun = false;
+        this.listner = new IventListner(this);
         this.snake = new Snake(CELL_SIZE, CELL_SIZE, this);
         this.foodManager = new FoodManager(this);
+        this.isRun = false;
         this.score = 0;
         this.timer = 0;
         this.interval = INTERVAL;
-        this.lastKeyPressed = "";
     }
 
     decreaseInterval(value) {

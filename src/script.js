@@ -15,7 +15,7 @@ export const MAP_HEIGHT = canvas.height - Y_OFFSET; // map height
 export const FOOD_LIMIT = 100;
 export const CELL_SIZE = 25; //25
 export const INTERVAL = 140;
-export const DECREASE_INTERVAL_VALUE = 0.25;
+export const DECREASE_INTERVAL_VALUE = 0.1;
 
 
 const game = new Game();
@@ -41,7 +41,6 @@ function animation(timeStamp = 0) {
     ctx.save();
     ctx.translate(X_OFFSET, Y_OFFSET);
 
-    game.drawBackground(ctx);
     game.draw(ctx, progress);
 
     ctx.restore();

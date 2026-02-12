@@ -1,6 +1,7 @@
 export class IventListner {
     constructor(game) {
         this.game = game;
+        this.keysPressed = [];
         this.isAnyKeyWasPressed = false;
 
 
@@ -9,7 +10,15 @@ export class IventListner {
                 this.game.start();
             }
 
-            this.game.lastKeyPressed = ev.key;
+            if (this.keysPressed.length < 4 && !this.keysPressed.includes(ev.key)) {
+                this.keysPressed.push(ev.key);
+            }
         })
+    }
+
+    getLastPressedKey() {
+        const lastKeyPressed = this.keysPressed[0];
+        this.keysPressed.splice(0, 1);
+        return lastKeyPressed;
     }
 }

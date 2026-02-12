@@ -57,7 +57,7 @@ export class Snake {
             const renderY = segment.oldY + (segment.y - segment.oldY) * progress;
 
             context.beginPath();
-            context.roundRect(renderX, renderY, this.width, this.height, 10);
+            context.roundRect(renderX, renderY, this.width, this.height, 15);
             context.fill();
         });
     }
@@ -75,22 +75,24 @@ export class Snake {
     }
 
     chooseMoveDirection() {
-        if (this.game.lastKeyPressed === "w" && this.moveDirection !== "Down") {
+        const lastKeyPressed = this.game.listner.getLastPressedKey();
+
+        if (lastKeyPressed === "w" && this.moveDirection !== "Down") {
             this.moveDirection = "Up";
             this.ySpeed = -this.speed;
             this.xSpeed = 0;
         }
-        else if (this.game.lastKeyPressed === "s" && this.moveDirection !== "Up") {
+        else if (lastKeyPressed === "s" && this.moveDirection !== "Up") {
             this.moveDirection = "Down";
             this.ySpeed = this.speed;
             this.xSpeed = 0;
         }
-        else if(this.game.lastKeyPressed === "d" && this.moveDirection !== "Left") {
+        else if(lastKeyPressed === "d" && this.moveDirection !== "Left") {
             this.moveDirection = "Right";
             this.xSpeed = this.speed;
             this.ySpeed = 0;
         }   
-        else if(this.game.lastKeyPressed === "a" && this.moveDirection !== "Right") {
+        else if(lastKeyPressed === "a" && this.moveDirection !== "Right") {
             this.moveDirection = "Left";
             this.xSpeed = -this.speed;
             this.ySpeed = 0;
