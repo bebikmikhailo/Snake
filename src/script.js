@@ -12,12 +12,13 @@ export const MAP_WIDTH = canvas.width; // map width
 export const MAP_HEIGHT = canvas.height; // map height
 export const FOOD_LIMIT = 10;
 export const CELL_SIZE = 25; //25
+export const INTERVAL = 140;
+export const DECREASE_INTERVAL_VALUE = 1;
 
 
 const game = new Game();
 
 let lastTime = 0;
-let interval = 140;
 
 function animation(timeStamp = 0) {
     const deltaTime = timeStamp - lastTime;
@@ -25,13 +26,13 @@ function animation(timeStamp = 0) {
 
     if (game.isRun) {
         game.timer += deltaTime;
-        if (game.timer > interval) {
+        if (game.timer > game.interval) {
             game.update();    
             game.timer = 0;
         }
     }
 
-    const progress = (interval === 0) ? 0 : game.timer / interval;
+    const progress = (game.interval === 0) ? 0 : game.timer / game.interval;
 
     ctx.clearRect(0, 0, MAP_WIDTH, MAP_HEIGHT);
     game.drawBackground(ctx);

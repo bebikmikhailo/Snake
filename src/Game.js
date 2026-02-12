@@ -4,6 +4,7 @@ import { FoodManager } from './FoodManager.js';
 import { MAP_WIDTH } from './script.js';
 import { MAP_HEIGHT } from './script.js';
 import { CELL_SIZE } from './script.js';
+import { INTERVAL } from './script.js';
 
 
 
@@ -14,6 +15,7 @@ export class Game {
         this.listner = new IventListner(this);
         this.foodManager = new FoodManager(this);
         this.timer = 0; // game timer
+        this.interval = INTERVAL;
         this.lastKeyPressed = "";
         this.isRun = false;
     }
@@ -54,6 +56,11 @@ export class Game {
         this.snake = new Snake(CELL_SIZE, CELL_SIZE, this);
         this.foodManager = new FoodManager(this);
         this.timer = 0;
+        this.interval = INTERVAL;
         this.lastKeyPressed = "";
+    }
+
+    decreaseInterval(value) {
+        this.interval -= value;
     }
 }

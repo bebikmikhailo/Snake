@@ -2,6 +2,7 @@ import { Segment } from './Segment.js';
 import { MAP_WIDTH } from './script.js';
 import { MAP_HEIGHT } from './script.js';
 import { CELL_SIZE } from './script.js';
+import { DECREASE_INTERVAL_VALUE } from './script.js';
 
 
 export class Snake {
@@ -37,10 +38,13 @@ export class Snake {
         this.body[0].y += this.ySpeed;
 
         // this.body[0] is snake's head and I check weather snake's head colides with food
-        this.game.foodManager.isFoodEaten(this.body[0]);
+        if (this.game.foodManager.isFoodEaten(this.body[0])) {
+            this.grow();
+            this.increaseSpeed();
+        }
 
 
-
+        this.checkHeadColisionWithBody();
         this.checkColisionWithMap();
     }
 
@@ -57,12 +61,16 @@ export class Snake {
         });
     }
 
+
+    // checks weather snake colides with map, if yes restarts game
     checkColisionWithMap() {
         this.body.forEach(segment => {
-            if ((segment.x + this.width > MAP_WIDTH || segment.x < 0) || (segment.y + this.height > MAP_HEIGHT || segment.y < 0)) {
-                this.game.restart();
-            }
-        })
+            if ((segment.x + this.width > MAP_WIDTH || segment.x < 0) ||
+                (segment.y + this.height > MAP_HEIGHT || segment.y < 0)) {
+
+                    this.game.restart();
+                }
+        });
     }
 
     chooseMoveDirection() {
@@ -93,4 +101,33 @@ export class Snake {
             return Segment.isSegmentsColide(seg, segment);
         }); 
     }
-}
+
+    // to grow snake
+    // adding a new segment as a new tail on position of old tail
+    grow() {
+        const oldTail = this.body[this.body.length - 1];
+        const newTail = new Segment(oldTail.x, oldTail.y);
+
+        newTail.oldX = oldTail.oldX;
+        newTail.oldY = oldTail.oldY;
+
+        this.body.push(newTail);
+    }
+
+
+    // checks weather snake's head colides with it's body, if yes restarts game
+    checkHeadColisionWithBody() {
+        const bodyWithOutHead = this.body.slice(1, this.body.length);
+        const headSegment = this.body[0];
+
+        bodyWithOutHead.forEach(segment => {
+            if (Segment.isSegmentsColide(headSegment, segment)) {
+                this.game.restart();
+            }
+        })
+    }
+
+    increaseSpeed() {
+        this.game.decreaseInterval(DECREASE_INTERVAL_VALUE);
+    }
+ }
