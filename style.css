@@ -9,6 +9,6 @@ body {
 #canvas {
     width: 600px;
     height: 600px;
-    background-color: lightblue;
-    box-shadow: 4px 4px black;
+    background-color: #0096FF;
+    box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.2);
 }

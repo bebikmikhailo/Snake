@@ -39,6 +39,7 @@ export class Snake {
 
         // this.body[0] is snake's head and I check weather snake's head colides with food
         if (this.game.foodManager.isFoodEaten(this.body[0])) {
+            this.game.score++;
             this.grow();
             this.increaseSpeed();
         }

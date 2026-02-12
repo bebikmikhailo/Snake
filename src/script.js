@@ -2,18 +2,20 @@ import { Game } from './Game.js';
 
 const canvas = document.getElementById("canvas");
 
-canvas.width = 425; // 425
-canvas.height = 375; // 375
+export const X_OFFSET = 0;
+export const Y_OFFSET = 50;
+
+canvas.width = 425 + X_OFFSET; // 425
+canvas.height = 375 + Y_OFFSET; // 375
 
 const ctx = canvas.getContext("2d");
 
-
-export const MAP_WIDTH = canvas.width; // map width
-export const MAP_HEIGHT = canvas.height; // map height
-export const FOOD_LIMIT = 10;
+export const MAP_WIDTH = canvas.width - X_OFFSET; // map width
+export const MAP_HEIGHT = canvas.height - Y_OFFSET; // map height
+export const FOOD_LIMIT = 100;
 export const CELL_SIZE = 25; //25
 export const INTERVAL = 140;
-export const DECREASE_INTERVAL_VALUE = 1;
+export const DECREASE_INTERVAL_VALUE = 0.25;
 
 
 const game = new Game();
@@ -35,8 +37,14 @@ function animation(timeStamp = 0) {
     const progress = (game.interval === 0) ? 0 : game.timer / game.interval;
 
     ctx.clearRect(0, 0, MAP_WIDTH, MAP_HEIGHT);
+
+    ctx.save();
+    ctx.translate(X_OFFSET, Y_OFFSET);
+
     game.drawBackground(ctx);
     game.draw(ctx, progress);
+
+    ctx.restore();
 
     requestAnimationFrame(animation);
 }
