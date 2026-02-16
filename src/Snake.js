@@ -50,16 +50,49 @@ export class Snake {
     }
 
     draw(context, progress) {
-        context.fillStyle = this.color;
-        this.body.forEach(segment => {
+        const s = 0.5;
 
-            const renderX = segment.oldX + (segment.x - segment.oldX) * progress;
-            const renderY = segment.oldY + (segment.y - segment.oldY) * progress;
+        context.strokeStyle = "darkblue";
+        context.lineCap = "round";
+        context.lineJoin = "round";
+        context.lineWidth = 40 * s;
 
-            context.beginPath();
-            context.roundRect(renderX, renderY, this.width, this.height, 15);
-            context.fill();
-        });
+        context.beginPath();
+
+        const tail = this.body[this.body.length - 1];
+        const tailX = tail.oldX + (tail.x - tail.oldX) * progress;
+        const tailY = tail.oldY + (tail.y - tail.oldY) * progress;
+        context.moveTo(tailX + CELL_SIZE / 2, tailY + CELL_SIZE / 2);
+
+        for (let i = this.body.length - 1; i > 0; i--) {
+
+            // const curr =  this.body[i];
+            // const next = this.body[i - 1]
+            
+            // const currX = curr.x + CELL_SIZE / 2;
+            // const currY = curr.y + CELL_SIZE / 2;
+
+            // const nextX = next.x + CELL_SIZE / 2;
+            // const nextY = next.y + CELL_SIZE / 2;
+
+            // const midX = (currX + nextX) / 2;
+            // const midY = (currY + nextY) / 2;
+
+            // context.quadraticCurveTo(currX, currY, midX, midY);
+
+
+
+            const segment = this.body[i];
+            context.lineTo(segment.x + CELL_SIZE / 2, segment.y + CELL_SIZE / 2);
+        }
+
+
+        const head = this.body[0];
+        const headX = head.oldX + (head.x - head.oldX) * progress;
+        const headY = head.oldY + (head.y - head.oldY) * progress;
+        context.lineTo(headX + CELL_SIZE / 2, headY + CELL_SIZE / 2);
+    
+        context.stroke();
     }
 
 

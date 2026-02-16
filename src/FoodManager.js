@@ -32,7 +32,7 @@ export class FoodManager {
             if (!this.game.snake.isColidesWithSnake(foodSegment) && !this.isSegmentColideFood(foodSegment)) {
                 switch(foodType) {
                     case "Apple":
-                        this.food.push(new Apple(foodSegment, 0.22));
+                        this.food.push(new Apple(foodSegment, 0.25));
                         break;
                 }
             }

@@ -10,7 +10,7 @@ export class IventListner {
                 this.game.start();
             }
 
-            if (this.keysPressed.length < 4 && !this.keysPressed.includes(ev.key)) {
+            if (this.keysPressed.length < 2 && !this.keysPressed.includes(ev.key)) {
                 this.keysPressed.push(ev.key);
             }
         })
