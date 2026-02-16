@@ -16,7 +16,7 @@ import { INTERVAL } from './script.js';
 export class Game {
     constructor() {
         this.board = new Board(this);
-        this.snake = new Snake(CELL_SIZE, CELL_SIZE, this);
+        this.snake = new Snake(this);
         this.listner = new IventListner(this);
         this.foodManager = new FoodManager(this);
         this.hud = new HUD(this);
@@ -35,8 +35,8 @@ export class Game {
     draw(context, progress) {
         this.board.draw(context);
         this.snake.draw(context, progress);
-        this.hud.draw(context);
         this.foodManager.draw(context);
+        this.hud.draw(context);
     }
 
     start() {
@@ -45,7 +45,7 @@ export class Game {
 
     restart() {
         this.listner = new IventListner(this);
-        this.snake = new Snake(CELL_SIZE, CELL_SIZE, this);
+        this.snake = new Snake(this);
         this.foodManager = new FoodManager(this);
         this.isRun = false;
         this.score = 0;

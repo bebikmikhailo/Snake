@@ -1,4 +1,6 @@
 import { Segment } from './Segment.js';
+import { SnakeSprite } from './SnakeSprite.js';
+
 import { MAP_WIDTH } from './script.js';
 import { MAP_HEIGHT } from './script.js';
 import { CELL_SIZE } from './script.js';
@@ -6,17 +8,16 @@ import { DECREASE_INTERVAL_VALUE } from './script.js';
 
 
 export class Snake {
-    constructor(x, y, game) {
+    constructor(game) {
         this.game = game;
-        this.height = 25;
-        this.width = 25;
+        this.height = CELL_SIZE;
+        this.width = CELL_SIZE;
         this.speed = CELL_SIZE;
         this.xSpeed = 0;
         this.ySpeed = 0;
-        this.color = "yellow";
-        this.body = [new Segment(x, y), new Segment(0, CELL_SIZE), new Segment(0, 0)];
+        this.sprite = new SnakeSprite(this, "orange", 0.5);
+        this.body = [new Segment(100, 150), new Segment(75, 150), new Segment(50, 150)];
         this.moveDirection = "None";
-        this.moveProgress = 0;
     }
 
     update() {
@@ -50,49 +51,7 @@ export class Snake {
     }
 
     draw(context, progress) {
-        const s = 0.5;
-
-        context.strokeStyle = "darkblue";
-        context.lineCap = "round";
-        context.lineJoin = "round";
-        context.lineWidth = 40 * s;
-
-        context.beginPath();
-
-        const tail = this.body[this.body.length - 1];
-        const tailX = tail.oldX + (tail.x - tail.oldX) * progress;
-        const tailY = tail.oldY + (tail.y - tail.oldY) * progress;
-        context.moveTo(tailX + CELL_SIZE / 2, tailY + CELL_SIZE / 2);
-
-        for (let i = this.body.length - 1; i > 0; i--) {
-
-            // const curr =  this.body[i];
-            // const next = this.body[i - 1]
-            
-            // const currX = curr.x + CELL_SIZE / 2;
-            // const currY = curr.y + CELL_SIZE / 2;
-
-            // const nextX = next.x + CELL_SIZE / 2;
-            // const nextY = next.y + CELL_SIZE / 2;
-
-            // const midX = (currX + nextX) / 2;
-            // const midY = (currY + nextY) / 2;
-
-            // context.quadraticCurveTo(currX, currY, midX, midY);
-
-
-
-            const segment = this.body[i];
-            context.lineTo(segment.x + CELL_SIZE / 2, segment.y + CELL_SIZE / 2);
-        }
-
-
-        const head = this.body[0];
-        const headX = head.oldX + (head.x - head.oldX) * progress;
-        const headY = head.oldY + (head.y - head.oldY) * progress;
-        context.lineTo(headX + CELL_SIZE / 2, headY + CELL_SIZE / 2);
-    
-        context.stroke();
+        this.sprite.draw(context, progress);
     }
 
 
