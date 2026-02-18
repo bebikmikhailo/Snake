@@ -5,7 +5,7 @@ import { MAP_WIDTH } from './script.js';
 import { MAP_HEIGHT } from './script.js';
 import { CELL_SIZE } from './script.js';
 import { DECREASE_INTERVAL_VALUE } from './script.js';
-
+import { SCALE } from './script.js';
 
 export class Snake {
     constructor(game) {
@@ -15,8 +15,12 @@ export class Snake {
         this.speed = CELL_SIZE;
         this.xSpeed = 0;
         this.ySpeed = 0;
-        this.sprite = new SnakeSprite(this, "orange", 0.5);
-        this.body = [new Segment(100, 150), new Segment(75, 150), new Segment(50, 150)];
+        this.sprite = new SnakeSprite(this, "orange", SCALE * 0.9);
+        this.body = [
+                    new Segment(CELL_SIZE * 4, CELL_SIZE * 8),
+                    new Segment(CELL_SIZE * 3, CELL_SIZE * 8),
+                    new Segment(CELL_SIZE * 2, CELL_SIZE * 8)
+                ];
         this.moveDirection = "None";
     }
 

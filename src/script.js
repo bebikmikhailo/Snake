@@ -1,13 +1,17 @@
 import { Game } from './Game.js';
 
 const canvas = document.getElementById("canvas");
+const dpr = window.devicePixelRatio || 1;
+
+const baseWidth = 640;
+export const SCALE = canvas.width / (baseWidth * dpr);
 
 export const X_OFFSET = 0;
-export const Y_OFFSET = 50;
+export const Y_OFFSET = 0;
 
 const ROWS = 17;
 const COLUMNS = 15;
-export const CELL_SIZE = 25; //25
+export const CELL_SIZE = 75; //25
 
 canvas.width = CELL_SIZE * ROWS + X_OFFSET; // 425
 canvas.height = CELL_SIZE * COLUMNS + Y_OFFSET; // 375

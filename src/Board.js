@@ -5,8 +5,8 @@ import { CELL_SIZE } from "./script.js";
 export class Board {
     constructor(game) {
         this.game = game;
-        this.lightColor = "#A7D2FF";
-        this.darkColor = "#87C1FF";
+        this.lightColor = "#b0a7ff";
+        this.darkColor = "#a787ff";
     }
 
     draw(context) {

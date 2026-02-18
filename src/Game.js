@@ -34,9 +34,9 @@ export class Game {
 
     draw(context, progress) {
         this.board.draw(context);
-        this.snake.draw(context, progress);
         this.foodManager.draw(context);
-        this.hud.draw(context);
+        this.snake.draw(context, progress);
+        //this.hud.draw(context);
     }
 
     start() {

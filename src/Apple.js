@@ -16,12 +16,20 @@ export class Apple extends Food{
         const x = this.segment.x + (CELL_SIZE / 2);
         const y = this.segment.y + (CELL_SIZE / 2);
 
+        // shades
+
+        context.save();
+        context.shadowColor = 'rgba(0, 0, 0, 0.25)';
+        context.shadowOffsetY = 10;
+
         // red body
         context.beginPath();
         context.fillStyle = "red";
         context.arc(x, y, 50 * s, 0, 2 * Math.PI);
         context.fill();
         context.closePath();
+
+        context.restore();
 
         // glare
         context.beginPath();
