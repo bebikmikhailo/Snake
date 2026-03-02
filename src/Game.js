@@ -7,7 +7,6 @@ import { HUD } from './HUD.js';
 //
 
 // constants
-import { CELL_SIZE } from './script.js';
 import { INTERVAL } from './script.js';
 //
 
@@ -36,7 +35,7 @@ export class Game {
         this.board.draw(context);
         this.foodManager.draw(context);
         this.snake.draw(context, progress);
-        //this.hud.draw(context);
+        this.hud.draw(context);
     }
 
     start() {

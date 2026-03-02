@@ -4,11 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/general.css">
+    <link rel="stylesheet" href="styles/hud-bar.css">
+    <link rel="stylesheet" href="styles/canva-window.css">
 </head>
 <body>
-    <div id="canvasDiv">
-        <canvas id="canvas"></canvas>
+
+    <div class="main">
+        <div class="hud-bar">
+            <div class="left-part">
+                <img src="images/apple.png" alt="food image" class="food-img">
+                <div class="score">
+                    0
+                </div>
+            </div>
+        </div>
+        <canvas class="canvas-window"></canvas>
     </div>
     <script type="module" src="src/script.js"></script>
 </body>

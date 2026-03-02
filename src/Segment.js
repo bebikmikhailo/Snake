@@ -1,5 +1,3 @@
-import { CELL_SIZE } from './script.js';
-
 export class Segment {
     constructor(x, y) {
         this.x = x;

@@ -1,6 +1,6 @@
 import { Game } from './Game.js';
 
-const canvas = document.getElementById("canvas");
+const canvas = document.querySelector(".canvas-window");
 const dpr = window.devicePixelRatio || 1;
 
 const baseWidth = 640;
@@ -20,7 +20,7 @@ const ctx = canvas.getContext("2d");
 
 export const MAP_WIDTH = canvas.width - X_OFFSET; // map width
 export const MAP_HEIGHT = canvas.height - Y_OFFSET; // map height
-export const FOOD_LIMIT = 100;
+export const FOOD_LIMIT = 1;
 export const INTERVAL = 140;
 export const DECREASE_INTERVAL_VALUE = 0.1;
 

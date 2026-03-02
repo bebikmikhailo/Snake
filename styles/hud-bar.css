@@ -1,0 +1,27 @@
+.hud-bar {
+    width: 640px;
+    height: 60px;
+    background-color: purple;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.left-part {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 0.5rem;
+    color: white;
+}
+
+.food-img {
+    width: 50px;
+    height: 50px;
+}
+
+.score {
+    font-size: 1.5rem;
+    margin-top: 5px;
+    margin-left: 10px;
+}
