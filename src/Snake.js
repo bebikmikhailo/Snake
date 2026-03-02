@@ -14,7 +14,7 @@ export class Snake {
         this.speed = CELL_SIZE;
         this.xSpeed = 0;
         this.ySpeed = 0;
-        this.sprite = new SnakeSprite(this, "orange", 0.45);
+        this.sprite = new SnakeSprite(this, 400, 0.45); // 400 - orange 280 - purple
         this.body = [
                     new Segment(CELL_SIZE * 4, CELL_SIZE * 8),
                     new Segment(CELL_SIZE * 3, CELL_SIZE * 8),
@@ -41,7 +41,7 @@ export class Snake {
         this.body[0].x += this.xSpeed;
         this.body[0].y += this.ySpeed;
 
-        // this.body[0] is snake's head and I check weather snake's head colides with food
+        // this.body[0] is snake's head and I check weather snake's head colides with food or not
         if (this.game.foodManager.isFoodEaten(this.body[0])) {
             this.game.score++;
             this.grow();

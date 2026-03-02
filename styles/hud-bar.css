@@ -1,6 +1,6 @@
 .hud-bar {
     width: 640px;
-    height: 60px;
+    height: 70px;
     background-color: purple;
     display: flex;
     align-items: center;
@@ -22,6 +22,6 @@
 
 .score {
     font-size: 1.5rem;
-    margin-top: 5px;
+    margin-top: 8px;
     margin-left: 10px;
 }

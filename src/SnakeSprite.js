@@ -11,7 +11,7 @@ export class SnakeSprite {
         this.drawBodyShade(context, progress);
         this.drawHeadShade(context, progress);
         this.drawBody(context, progress);
-        this.drawHead(context, progress);
+        this.drawHead(context, progress, this.chooseAngle());
     }
 
     drawBodyPath(context, progress) {
@@ -50,7 +50,7 @@ export class SnakeSprite {
     }
 
     drawBody(context, progress) {
-        context.strokeStyle = this.color;
+        context.strokeStyle = `hsl(${this.color}, 100%, 50%)`;
         context.lineCap = "round";
         context.lineJoin = "round";
         context.lineWidth = (CELL_SIZE * 1.7) * this.size;
@@ -91,19 +91,11 @@ export class SnakeSprite {
         
     }
 
-    drawHead(context, progress) {
+    drawHead(context, progress, angle) {
         const head = this.snake.body[0];
 
         const headX = head.oldX + (head.x - head.oldX) * progress;
         const headY = head.oldY + (head.y - head.oldY) * progress;
-
-        let angle = 0;
-        switch(this.snake.moveDirection) {
-            case "Up":    angle = -Math.PI / 2; break; 
-            case "Down":  angle = Math.PI / 2;  break; 
-            case "Left":  angle = Math.PI;      break; 
-            case "Right": angle = 0;            break; 
-        }
 
         context.save();
 
@@ -113,7 +105,7 @@ export class SnakeSprite {
         
 
         context.beginPath();
-        context.fillStyle = this.color;
+        context.fillStyle = `hsl(${this.color}, 100%, 50%)`;
         context.arc(0, 0, (CELL_SIZE * 1.3), 0, 2 * Math.PI);
         context.fill();
 
@@ -127,14 +119,14 @@ export class SnakeSprite {
 
 
         context.beginPath();
-        context.fillStyle = `hsl(20, 100%, 20%)`;
+        context.fillStyle = `hsl(${this.color}, 100%, 20%)`;
         context.arc(-10, 45, 20, 0, 2 * Math.PI);
         context.arc(-10, -45, 20, 0, 2 * Math.PI);
         context.fill();
 
 
         context.beginPath();
-        context.fillStyle = `hsl(20, 100%, 30%)`;
+        context.fillStyle = `hsl(${this.color}, 100%, 30%)`;
         context.arc(50, 20, 5, 0, 2 * Math.PI);
         context.arc(50, -20, 5, 0, 2 * Math.PI);
         context.fill();
@@ -143,5 +135,16 @@ export class SnakeSprite {
     }
 
 
+    chooseAngle() {
+        let angle = 0;
+        switch(this.snake.moveDirection) {
+            case "Up":    angle = -Math.PI / 2; break; 
+            case "Down":  angle = Math.PI / 2;  break; 
+            case "Left":  angle = Math.PI;      break; 
+            case "Right": angle = 0;            break; 
+        }
+
+        return angle
+    }
 
 }
