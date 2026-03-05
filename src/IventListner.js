@@ -4,13 +4,21 @@ export class IventListner {
         this.keysPressed = [];
         this.isAnyKeyWasPressed = false;
 
+        this.gameKeys = ["a", "w", "s", "d"];
+
 
         window.addEventListener("keydown", (ev) => {
-            if (!this.game.isRun) {
+
+            if (this.game.isGameEnding) return;
+            
+            if (!this.game.isRun && this.gameKeys.includes(ev.key)) {
                 this.game.start();
             }
 
-            if (this.keysPressed.length < 2 && !this.keysPressed.includes(ev.key)) {
+            if (this.keysPressed.length < 2 &&
+                !this.keysPressed.includes(ev.key) &&
+                this.gameKeys.includes(ev.key)) {
+                    
                 this.keysPressed.push(ev.key);
             }
         })

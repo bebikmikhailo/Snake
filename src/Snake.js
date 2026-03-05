@@ -14,26 +14,19 @@ export class Snake {
         this.speed = CELL_SIZE;
         this.xSpeed = 0;
         this.ySpeed = 0;
-        this.sprite = new SnakeSprite(this, 400, 0.45); // 400 - orange 280 - purple
         this.body = [
                     new Segment(CELL_SIZE * 4, CELL_SIZE * 8),
                     new Segment(CELL_SIZE * 3, CELL_SIZE * 8),
                     new Segment(CELL_SIZE * 2, CELL_SIZE * 8)
                 ];
-        this.moveDirection = "None";
+        this.sprite = new SnakeSprite(this, 560, 0.45); // 400 - orange 280 - purple
+        this.moveDirection = "Right";
     }
 
     update() {
         this.chooseMoveDirection();
 
-
-        // body
-        for (let i = this.body.length - 1; i > 0; i--) {
-            this.body[i].oldX = this.body[i].x;
-            this.body[i].oldY = this.body[i].y;
-            this.body[i].x = this.body[i - 1].x;
-            this.body[i].y = this.body[i - 1].y;
-        }
+        const preChangeHeadClone = this.body[0].clone();
 
         // head
         this.body[0].oldX = this.body[0].x;
@@ -41,16 +34,39 @@ export class Snake {
         this.body[0].x += this.xSpeed;
         this.body[0].y += this.ySpeed;
 
+        const postChangeHeadClone = this.body[0].clone();
+
+        if (this.checkHeadColisionWithBody() || this.checkColisionWithMap())  {
+            this.body[0] = preChangeHeadClone;
+            this.colideAnimation();
+            this.game.isGameEnding = true;
+            this.game.gameIsBlocked = true;
+            return;
+        }
+
+        this.body[0] = preChangeHeadClone.clone();
+
+
+        if (this.xSpeed !== 0 || this.ySpeed !== 0) {
+            for (let i = this.body.length - 1; i > 0; i--) {
+                this.body[i].oldX = this.body[i].x;
+                this.body[i].oldY = this.body[i].y;
+                this.body[i].x = this.body[i - 1].x;
+                this.body[i].y = this.body[i - 1].y;
+            }
+        } 
+        // body
+
+        this.body[0] = postChangeHeadClone.clone();
+
+
+
         // this.body[0] is snake's head and I check weather snake's head colides with food or not
         if (this.game.foodManager.isFoodEaten(this.body[0])) {
             this.game.score++;
             this.grow();
             this.increaseSpeed();
         }
-
-
-        this.checkHeadColisionWithBody();
-        this.checkColisionWithMap();
     }
 
     draw(context, progress) {
@@ -60,11 +76,11 @@ export class Snake {
 
     // checks weather snake colides with map, if yes restarts game
     checkColisionWithMap() {
-        this.body.forEach(segment => {
+        return this.body.some(segment => {
             if ((segment.x + this.width > MAP_WIDTH || segment.x < 0) ||
                 (segment.y + this.height > MAP_HEIGHT || segment.y < 0)) {
 
-                    this.game.restart();
+                    return true;
                 }
         });
     }
@@ -118,14 +134,39 @@ export class Snake {
         const bodyWithOutHead = this.body.slice(1, this.body.length);
         const headSegment = this.body[0];
 
-        bodyWithOutHead.forEach(segment => {
+        return bodyWithOutHead.some(segment => {
             if (Segment.isSegmentsColide(headSegment, segment)) {
-                this.game.restart();
+                return true;
             }
         })
     }
 
     increaseSpeed() {
         this.game.decreaseInterval(DECREASE_INTERVAL_VALUE);
+    }
+
+    colideAnimation() {
+        [this.xSpeed, this.ySpeed] = [-this.xSpeed, -this.ySpeed];
+
+        for (let i = 0; i < this.body.length - 1; i++) {
+            const currSeg = this.body[i];
+            const nextSeg = this.body[i + 1];
+
+            [currSeg.x, currSeg.oldX] = [nextSeg.x, currSeg.x];
+            [currSeg.y, currSeg.oldY] = [nextSeg.y, currSeg.y];
+
+        }
+
+        const lastSeg = this.body[this.body.length - 1];
+
+        [lastSeg.x, lastSeg.oldX] = [lastSeg.oldX, lastSeg.x];
+        [lastSeg.y, lastSeg.oldY] = [lastSeg.oldY, lastSeg.y];
+
+    
+
+        this.body = this.body.reverse();
+        this.sprite.head = this.body[this.body.length - 1];
+        this.sprite.tail = this.body[0];
+
     }
  }

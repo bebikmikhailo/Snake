@@ -5,13 +5,18 @@ export class SnakeSprite {
         this.snake = snake;
         this.color = color;
         this.size = size;
+        this.head = null;
+        this.tail = null;
     }
 
     draw(context, progress) {
         this.drawBodyShade(context, progress);
-        this.drawHeadShade(context, progress);
+
+        const angle = (this.snake.game.isGameEnding) ? this.chooseAngleByBody() : this.chooseAngle();
+
+        this.drawHeadShade(context, progress, angle);
         this.drawBody(context, progress);
-        this.drawHead(context, progress, this.chooseAngle());
+        this.drawHead(context, progress, angle);
     }
 
     drawBodyPath(context, progress) {
@@ -59,19 +64,11 @@ export class SnakeSprite {
     }
 
 
-    drawHeadShade(context, progress) {
-        const head = this.snake.body[0];
+    drawHeadShade(context, progress, angle) {
+        const head = (this.head === null) ? this.snake.body[0] : this.head;
 
         const headX = head.oldX + (head.x - head.oldX) * progress;
         const headY = head.oldY + (head.y - head.oldY) * progress;
-
-        let angle = 0;
-        switch(this.snake.moveDirection) {
-            case "Up":    angle = -Math.PI / 2; break; 
-            case "Down":  angle = Math.PI / 2;  break; 
-            case "Left":  angle = Math.PI;      break; 
-            case "Right": angle = 0;            break; 
-        }
 
         context.save();
 
@@ -92,7 +89,7 @@ export class SnakeSprite {
     }
 
     drawHead(context, progress, angle) {
-        const head = this.snake.body[0];
+        const head = (this.head === null) ? this.snake.body[0] : this.head;
 
         const headX = head.oldX + (head.x - head.oldX) * progress;
         const headY = head.oldY + (head.y - head.oldY) * progress;
@@ -144,7 +141,28 @@ export class SnakeSprite {
             case "Right": angle = 0;            break; 
         }
 
-        return angle
+        return angle;
+    }
+
+    // function for knockback animation when snake colides with something
+    chooseAngleByBody() {
+        let angle = 0;
+        const seg = this.snake.body[this.snake.body.length - 2];
+
+        if (seg.x == this.head.x + CELL_SIZE && seg.y == this.head.y) {
+            angle = Math.PI;
+        }
+        else if (seg.x == this.head.x - CELL_SIZE && seg.y == this.head.y) {
+            angle = 0;
+        }
+        else if (seg.x == this.head.x && seg.y == this.head.y + CELL_SIZE) {
+            angle = -Math.PI / 2;
+        }
+        else if (seg.x == this.head.x && seg.y == this.head.y - CELL_SIZE) {
+            angle = Math.PI / 2;
+        }
+
+        return angle;
     }
 
 }

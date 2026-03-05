@@ -1,9 +1,9 @@
 export class Segment {
-    constructor(x, y) {
+    constructor(x, y, oldX = x, oldY = y) {
         this.x = x;
         this.y = y;
-        this.oldX = x;
-        this.oldY = y;
+        this.oldX = oldX;
+        this.oldY = oldY;
     }
 
     static getRandomSegment(width, height, cellSize) {
@@ -14,5 +14,9 @@ export class Segment {
 
     static isSegmentsColide(segment1, segment2) {
         return (segment1.x === segment2.x && segment1.y === segment2.y);
+    }
+
+    clone() {
+        return new Segment(this.x, this.y, this.oldX, this.oldY);
     }
 }

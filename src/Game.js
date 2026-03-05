@@ -23,6 +23,7 @@ export class Game {
         this.timer = 0; // game timer
         this.interval = INTERVAL;
         this.isRun = false;
+        this.isGameEnding = false;
     }
 
     update() {
@@ -50,6 +51,7 @@ export class Game {
         this.score = 0;
         this.timer = 0;
         this.interval = INTERVAL;
+        this.isGameEnding = false;
     }
 
     decreaseInterval(value) {
