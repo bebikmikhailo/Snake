@@ -40,7 +40,6 @@ export class Snake {
             this.body[0] = preChangeHeadClone;
             this.colideAnimation();
             this.game.isGameEnding = true;
-            this.game.gameIsBlocked = true;
             return;
         }
 

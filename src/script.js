@@ -20,7 +20,7 @@ const ctx = canvas.getContext("2d");
 
 export const MAP_WIDTH = canvas.width - X_OFFSET; // map width
 export const MAP_HEIGHT = canvas.height - Y_OFFSET; // map height
-export const FOOD_LIMIT = 100;
+export const FOOD_LIMIT = 1;
 export const INTERVAL = 140;
 export const DECREASE_INTERVAL_VALUE = 0.1;
 
@@ -29,7 +29,7 @@ const game = new Game();
 
 let lastTime = 0;
 
-async function animation(timeStamp = 0) {
+function animation(timeStamp = 0) {
     const deltaTime = timeStamp - lastTime;
     lastTime = timeStamp;
 
@@ -39,9 +39,8 @@ async function animation(timeStamp = 0) {
         if (game.isGameEnding) {
             if (game.timer >= game.interval) {
                 game.isRun = false;
-                await setTimeout(() => {
+                setTimeout(() => {
                     game.restart();
-                    
                 }, 1000);
 
             }
