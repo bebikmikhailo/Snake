@@ -47,7 +47,7 @@ export class Game {
         this.listner = new IventListner(this);
         this.snake = new Snake(this);
         this.foodManager = new FoodManager(this);
-        this.isRun = false;
+        this.isRun = true;
         this.score = 0;
         this.timer = 0;
         this.interval = INTERVAL;

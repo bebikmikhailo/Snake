@@ -40,7 +40,7 @@ function animation(timeStamp = 0) {
             if (game.timer >= game.interval) {
                 game.isRun = false;
                 setTimeout(() => {
-                    game.restart();
+                    game.hud.displayMenu();
                 }, 1000);
 
             }

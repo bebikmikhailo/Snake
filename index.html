@@ -7,20 +7,42 @@
     <link rel="stylesheet" href="styles/general.css">
     <link rel="stylesheet" href="styles/hud-bar.css">
     <link rel="stylesheet" href="styles/canva-window.css">
+    <link rel="stylesheet" href="styles/menu.css">
 </head>
 <body>
 
     <div class="main">
+        <div class="global-overlay js-global-overlay"></div>
+
+
         <div class="hud-bar">
             <div class="left-part">
-                <img src="images/apple.png" alt="food image" class="food-img">
-                <div class="score">
+                <img src="images/apple.png" alt="food image" class="hud-bar-food-img">
+                <div class="hud-bar-score js-hud-bar-score">
                     0
                 </div>
             </div>
         </div>
-        <canvas class="canvas-window"></canvas>
+
+        <div class="canvas-container">
+            <canvas class="canvas-window"></canvas>
+            <div class="hud-menu js-hud-menu">
+                <div class="post-game-stats">
+                    <img src="images/apple.png" alt="food image" class="menu-food-img">
+                    <div class="menu-score js-menu-score">
+                        0
+                    </div>
+                </div>
+                <div class="menu-buttons-container">
+                    <button class="menu-button js-menu-play-button">Play</button>
+                    <button class="menu-button">Settings</button>
+                    <button class="menu-button">Login</button>    
+                </div>
+            </div>
+        </div>
     </div>
+
+
     <script type="module" src="src/script.js"></script>
 </body>
 </html>

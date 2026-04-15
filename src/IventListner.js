@@ -9,12 +9,8 @@ export class IventListner {
 
         window.addEventListener("keydown", (ev) => {
 
-            if (this.game.isGameEnding) return;
+            if (this.game.isGameEnding || !this.game.isRun) return;
             
-            if (!this.game.isRun && this.gameKeys.includes(ev.key)) {
-                this.game.start();
-            }
-
             if (this.keysPressed.length < 2 &&
                 !this.keysPressed.includes(ev.key) &&
                 this.gameKeys.includes(ev.key)) {
