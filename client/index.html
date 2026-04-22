@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles/general.css">
+    <link rel="stylesheet" href="styles/hud-bar.css">
+    <link rel="stylesheet" href="styles/canva-window.css">
+    <link rel="stylesheet" href="styles/menu.css">
+    <link rel="stylesheet" href="styles/auth-menu.css">
+    <link rel="stylesheet" href="styles/sign-up-form.css">
+</head>
+<body>
+
+    <div class="main">
+        <div class="global-overlay js-global-overlay"></div>
+
+
+        <div class="hud-bar">
+            <div class="left-part">
+                <img src="images/apple.png" alt="food image" class="hud-bar-food-img">
+                <div class="hud-bar-score js-hud-bar-score">
+                    0
+                </div>
+            </div>
+        </div>
+
+        <div class="canvas-container">
+            <canvas class="canvas-window"></canvas>
+            <div class="hud-menu js-hud-menu">
+                <div class="post-game-stats">
+                    <img src="images/apple.png" alt="food image" class="menu-food-img">
+                    <div class="menu-score js-menu-score">
+                        0
+                    </div>
+                </div>
+                <div class="menu-buttons-container">
+                    <button class="menu-button js-menu-play-button">Play</button>
+                    <button class="menu-button">Settings</button>
+                    <button class="menu-button js-menu-sign-in-button">Sign in</button>
+                </div>
+            </div>
+            <div class="auth-menu js-auth-menu">
+                <button class="auth-back-button js-sign-in-back-button">Back</button>
+                <div class="sign-in-form">
+                    <div class="form-content">
+                        <h1>Sign in</h1>
+                        <form action="" class="form-style">
+                            <div>
+                                <label for="login-field">Email address</label>
+                                <input type="email" id="login-field">
+                            </div>
+                            <div class="password-fields-container">
+                                <label for="password">Password</label>
+                                <input type="password" id="password">
+                                <a href="" class="forgot-pass-ref">Forgot password?</a>
+                            </div>
+                            <button class="auth-menu-button auth-menu-authorize-button">Sign in</button>
+                        </form>
+                        <div class="webauth-container">
+                            <div class="auth-divider">
+                                <span>or</span>
+                            </div>
+                            <button class="auth-menu-button webauth-button">
+                                <div class="webauth-button-content">
+                                    <img src="images/google-icon-logo.svg" alt="" class="webauth-option-logo">
+                                    <span class="webauth-button-name">Continue with Google</span>
+                                </div>
+                            </button>
+                        </div>
+                        <span>
+                            Dont have an account?
+                            <a href="#" class="js-create-acc-ref">Create an account</a>
+                        </span>
+                    </div>
+                </div>
+                <div class="sign-up-form js-sign-up-form">
+                    <button class="auth-back-button js-sign-up-back-button">Back</button>
+                    <div class="form-content">
+                        <h1>Sign up</h1>
+                        <form action="" class="form-style">
+                            <div>
+                                <label for="login-field">Email address</label>
+                                <input type="email" id="login-field">
+                            </div>
+                            <div>
+                                <label for="username-field">Username</label>
+                                <input type="text" id="username-field">
+                            </div>
+                            <div class="password-fields-container">
+                                <label for="password">Password</label>
+                                <input type="password" id="password">
+                            </div>
+                            <button class="auth-menu-button auth-menu-authorize-button">Create account</button>
+                        </form>
+                        <div class="webauth-container">
+                            <div class="auth-divider">
+                                <span>or</span>
+                            </div>
+                            <button class="auth-menu-button webauth-button">
+                                <div class="webauth-button-content">
+                                    <img src="images/google-icon-logo.svg" alt="" class="webauth-option-logo">
+                                    <span class="webauth-button-name">Continue with Google</span>
+                                </div>
+                            </button>
+                        </div>
+                        <span>
+                            Already have an account?
+                            <a href="#" class="js-sign-in-ref">Sign in</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="module" src="src/script.js"></script>
+</body>
+</html>

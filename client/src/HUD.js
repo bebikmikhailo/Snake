@@ -14,7 +14,25 @@ export class HUD {
             }
         });
 
+        document.querySelector(".js-menu-sign-in-button").addEventListener("click", () => {
+            document.querySelector(".js-auth-menu").style.display = "block";
+        });
 
+        document.querySelector(".js-sign-in-back-button").addEventListener("click", () => {
+            document.querySelector(".js-auth-menu").style.display = "none";
+        });
+
+        document.querySelector(".js-create-acc-ref").addEventListener("click", () => {
+            document.querySelector(".js-sign-up-form").style.display = "block";
+        })
+
+        document.querySelector(".js-sign-up-back-button").addEventListener("click", () => {
+            document.querySelector(".js-sign-up-form").style.display = "none";
+        });
+
+        document.querySelector(".js-sign-in-ref").addEventListener("click", () => {
+            document.querySelector(".js-sign-up-form").style.display = "none";
+        })
 
     }
 
