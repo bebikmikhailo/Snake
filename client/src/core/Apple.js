@@ -1,5 +1,5 @@
 import { Food } from './Food.js';
-import { CELL_SIZE } from './script.js';
+import { CELL_SIZE } from '../script.js';
 
 export class Apple extends Food{
     constructor(segment, size) {
