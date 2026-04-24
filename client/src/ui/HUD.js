@@ -5,7 +5,7 @@ export class HUD {
     constructor(game) {
         this.game = game;
         this.authManager = new AuthManager(this);
-        this.menuManager = new MenuManager(this);
+        this.menuManager = new MenuManager(this, this.game);
         
         this.hudBarScore = document.querySelector(".js-hud-bar-score");
     }

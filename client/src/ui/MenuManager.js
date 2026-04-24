@@ -1,6 +1,7 @@
 export class MenuManager {
-    constructor(hud) {
+    constructor(hud, game) {
         this.hud = hud;
+        this.game = game;
         this.restartMenu = document.querySelector(".js-hud-menu");
         this.globalOverlay = document.querySelector(".js-global-overlay");
         this.authMenu = document.querySelector(".js-auth-menu");
