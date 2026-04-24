@@ -1,4 +1,4 @@
-import { CELL_SIZE } from './script.js';
+import { CELL_SIZE } from '../script.js';
 
 export class SnakeSprite {
     constructor(snake, color, size) {

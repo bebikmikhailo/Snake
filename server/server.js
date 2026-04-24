@@ -3,14 +3,21 @@ const cors = require("cors");
 const app = express();
 const PORT = 3000;
 
+const router = require("./routes/index");
+
+
+const db = require('./database.js');
+
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+app.use("/api", router);
 
-app.post('/api/score', (req, res) => {
-    console.log(req.body);
-    res.sendStatus(200);
+ 
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send("Something broke!");
 });
-
 
 app.listen(PORT, () => {
     console.log(`Server is being run on ${PORT} port.`);

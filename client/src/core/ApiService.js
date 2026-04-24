@@ -1,10 +1,12 @@
+import { CONFIG } from "../config.js";
+
 export class ApiService {
     constructor(game) {
         this.game = game;
     }
 
     sendScore() {
-        fetch("http://localhost:3000/api/score", {
+        fetch(`${CONFIG.API_BASE_URL}/api/score`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

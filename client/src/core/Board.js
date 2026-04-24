@@ -1,6 +1,6 @@
-import { MAP_HEIGHT } from "./script.js";
-import { MAP_WIDTH } from "./script.js";
-import { CELL_SIZE } from "./script.js";
+import { MAP_HEIGHT } from "../script.js";
+import { MAP_WIDTH } from "../script.js";
+import { CELL_SIZE } from "../script.js";
 
 export class Board {
     constructor(game) {
