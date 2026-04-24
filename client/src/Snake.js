@@ -1,10 +1,10 @@
 import { Segment } from './Segment.js';
 import { SnakeSprite } from './SnakeSprite.js';
 
-import { MAP_WIDTH } from '../script.js';
-import { MAP_HEIGHT } from '../script.js';
-import { CELL_SIZE } from '../script.js';
-import { DECREASE_INTERVAL_VALUE } from '../script.js';
+import { MAP_WIDTH } from './script.js';
+import { MAP_HEIGHT } from './script.js';
+import { CELL_SIZE } from './script.js';
+import { DECREASE_INTERVAL_VALUE } from './script.js';
 
 export class Snake {
     constructor(game) {

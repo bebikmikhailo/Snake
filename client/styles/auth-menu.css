@@ -103,36 +103,6 @@
     line-height: -1;
 }
 
-.block {
-    display: none;
-    position: relative;
-    padding: 8px 8px;
-    border-radius: 6px;
-}
-
-.message {
-    background-color: green;
-}
-
-.error {
-    background-color: rgb(204, 33, 33);
-}
-
-.close-message-button {
-    border: none;
-    position: absolute;
-    border-radius: 6px;
-    padding: 2px 8px;
-    top: -6px;
-    right: -6px;
-    background-color: black;
-    color: white;
-    cursor: pointer;
-}
-
-
-
-
 /* sign in form */
 
 

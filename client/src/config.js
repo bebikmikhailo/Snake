@@ -1,4 +1,0 @@
-export const CONFIG = {
-    API_BASE_URL: "http://localhost:3000",
-    SERVER_PORT: "3000"
-};

@@ -1,9 +1,9 @@
 import { Segment } from './Segment.js';
 import { Apple } from './Apple.js';
-import { FOOD_LIMIT } from '../script.js';
-import { MAP_WIDTH } from '../script.js';
-import { MAP_HEIGHT } from '../script.js';
-import { CELL_SIZE } from '../script.js';
+import { FOOD_LIMIT } from './script.js';
+import { MAP_WIDTH } from './script.js';
+import { MAP_HEIGHT } from './script.js';
+import { CELL_SIZE } from './script.js';
 
 export class FoodManager {
     constructor(game) {

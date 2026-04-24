@@ -1,4 +1,4 @@
-import { Game } from './core/Game.js';
+import { Game } from './Game.js';
 
 const canvas = document.querySelector(".canvas-window");
 const dpr = window.devicePixelRatio || 1;

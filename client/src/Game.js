@@ -3,12 +3,12 @@ import { Board } from './Board.js';
 import { Snake } from './Snake.js';
 import { IventListner } from './IventListner.js';
 import { FoodManager } from './FoodManager.js';
-import { HUD } from '../ui/HUD.js';
+import { HUD } from './HUD.js';
 import { ApiService } from './ApiService.js';
 //
 
 // constants
-import { INTERVAL } from '../script.js';
+import { INTERVAL } from './script.js';
 //
 
 
