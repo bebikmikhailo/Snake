@@ -54,11 +54,12 @@ export class AuthManager {
 
                 if (!response.ok) {
                     messageType = "error";
+                    this.hud.menuManager.displaySignUpMessageBlock((await response.json()).message, messageType);
+                } else {
+                    this.hud.menuManager.displaySignInMessageBlock((await response.json()).message, messageType);
+                    this.signUpForm.reset();
+                    this.hud.menuManager.hideSignUpForm();    
                 }
-
-                this.hud.menuManager.displaySignInMessageBlock((await response.json()).message, messageType);
-                this.signUpForm.reset();
-                this.hud.menuManager.hideSignUpForm();
 
             } catch(err) {
                 console.log(err);

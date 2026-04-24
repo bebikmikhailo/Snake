@@ -10,6 +10,7 @@ export class MenuManager {
         this.signInForm = document.querySelector(".js-sign-in-form");
         this.signUpForm = document.querySelector(".js-sign-up-form");
         this.signInMessageBlock = document.querySelector(".js-sign-in-message-block");
+        this.signInMessageText = document.querySelector(".js-sign-in-message-block .js-message-text");
         this.signUpMessageBlock = document.querySelector(".js-sign-up-message-block");
         this.signUpMessageText = document.querySelector(".js-sign-up-message-block .js-message-text");
 
@@ -67,6 +68,7 @@ export class MenuManager {
     }
 
     hideSignInForm() {
+        this.signUpForm.reset();
         this.signInForm.reset();
         this.authMenu.style.display = "none";
         this.hideSignInMessageBlock();
@@ -78,7 +80,7 @@ export class MenuManager {
     }
 
     displaySignInMessageBlock(message, type) {
-        this.signInMessageBlock.textContent = message;
+        this.signInMessageText.textContent = message;
 
         if (type === "error" && !this.signInMessageBlock.classList.contains("error")) {
             this.signInMessageBlock.classList.replace("message", "error");
