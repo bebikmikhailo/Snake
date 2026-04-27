@@ -4,7 +4,7 @@ import { Snake } from './Snake.js';
 import { IventListner } from './IventListner.js';
 import { FoodManager } from './FoodManager.js';
 import { HUD } from '../ui/HUD.js';
-import { ApiService } from './ApiService.js';
+import { UserService } from './UserService.js';
 //
 
 // constants
@@ -20,7 +20,7 @@ export class Game {
         this.listner = new IventListner(this);
         this.foodManager = new FoodManager(this);
         this.hud = new HUD(this);
-        this.apiService = new ApiService(this);
+        this.userService = new UserService(this);
         this.score = 0; // game score
         this.timer = 0; // game timer
         this.interval = INTERVAL;
@@ -58,5 +58,14 @@ export class Game {
 
     decreaseInterval(value) {
         this.interval -= value;
+    }
+
+    resetScore() {
+        this.score = 0;
+    }
+
+    async doAfterGameEnds() {
+        this.hud.updateBestScore();
+        this.hud.displayMenu();
     }
 }

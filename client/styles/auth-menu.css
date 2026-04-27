@@ -1,8 +1,8 @@
 .auth-menu {
     display: none;
     position: absolute;
-    top: 25px;
-    left: 150px;
+    top: 0px;
+    left: 156px;
     background-color: rgb(17, 85, 204);
     width: 300px;
     height: 500px;
@@ -34,22 +34,6 @@
     font-size: 14px;
 }
 
-.auth-back-button {
-    cursor: pointer;
-    position: absolute;
-    margin-left: 6px;
-    margin-top: 6px;
-    border: none;
-    padding: 8px 8px;
-    border-radius: 6px;
-    color: white;
-    background-color:rgb(77, 153, 207);
-    transition: background-color .2s;
-}
-
-.auth-back-button:hover {
-    background-color:rgb(70, 129, 171);
-}
 
 .form-style {
     display: flex;
@@ -123,7 +107,7 @@
     position: absolute;
     border-radius: 6px;
     padding: 2px 8px;
-    top: -6px;
+    top: -8px;
     right: -6px;
     background-color: black;
     color: white;

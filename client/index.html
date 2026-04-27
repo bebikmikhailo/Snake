@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="styles/canva-window.css">
     <link rel="stylesheet" href="styles/menu.css">
     <link rel="stylesheet" href="styles/auth-menu.css">
+    <link rel="stylesheet" href="styles/account-menu.css">
 </head>
 <body>
 
@@ -18,9 +19,17 @@
 
         <div class="hud-bar">
             <div class="left-part">
-                <img src="images/apple.png" alt="food image" class="hud-bar-food-img">
-                <div class="hud-bar-score js-hud-bar-score">
-                    0
+                <div class="game-stats-container">
+                    <img src="images/apple.png" alt="food image" class="hud-bar-icon">
+                    <div class="hud-bar-score js-hud-bar-score">
+                        0
+                    </div>
+                </div>
+                <div class="game-stats-container">
+                    <img src="images/throphy-icon.png" alt="trophy image" class="hud-bar-icon">
+                    <div class="hud-bar-score js-hud-bar-best-score">
+                        0
+                    </div>
                 </div>
             </div>
         </div>
@@ -29,19 +38,76 @@
             <canvas class="canvas-window"></canvas>
             <div class="hud-menu js-hud-menu">
                 <div class="post-game-stats">
-                    <img src="images/apple.png" alt="food image" class="menu-food-img">
-                    <div class="menu-score js-menu-score">
-                        0
+                    <div class="image-score-container">
+                        <img src="images/apple.png" alt="food image" class="menu-stats-img">
+                        <div class="menu-score js-menu-score">
+                            0
+                        </div>
+                    </div>
+                    <div class="image-score-container">
+                        <img src="images/throphy-icon.png" alt="trophy image" class="menu-stats-img">
+                        <div class="menu-score js-menu-best-score">
+                            0
+                        </div>
                     </div>
                 </div>
                 <div class="menu-buttons-container">
-                    <button class="menu-button js-menu-play-button">Play</button>
-                    <button class="menu-button">Settings</button>
-                    <button class="menu-button js-menu-sign-in-button">Sign in</button>
+                    <button class="menu-button js-menu-play-button">
+                        Play
+                        <img src="./images/play-icon.svg" alt="play icon" class="menu-icon">
+                    </button>
+                    <button class="menu-button">
+                        Settings
+                        <img src="./images/gear-icon.svg" alt="gear icon" class="menu-icon">
+                    </button>
+                    <button class="menu-button">
+                        Leaderboard
+                        <img src="./images/crown-icon.svg" alt="crown icon" class="menu-icon">
+                    </button>
+                    <button class="menu-button menu-sign-in-button js-menu-sign-in-button">
+                        Sign in
+                        <img src="./images/sign-in-icon.svg" alt="sign in icon" class="menu-icon">
+                    </button>
+                    <button class="menu-button player-account-button js-player-account-button">
+                        <div class="account-button-container">
+                            <img src="./images/default-avatar.webp" alt="avatar" class="account-avatar">
+                            <div class="js-account-username"></div>
+                            <img src="./images/three-dots-icon.svg" alt="three dots icon" class="account-three-dots-icon">
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <div class="account-menu js-account-menu">
+                <div class="account-free-space">
+                    <button class="menu-back-button js-account-menu-back-button">
+                        <img src="./images/left-arrow.svg" alt="Back" class="menu-back-arrow-icon">
+                    </button>
+                </div>
+                <div class="menu-buttons-container">
+                    <button class="menu-button account-avatar-name js-player-account-button">
+                        <div class="account-avatar-name-container">
+                            <img src="./images/default-avatar.webp" alt="avatar" class="account-avatar">
+                            <div class="account-name-div js-account-userrname"></div>
+                        </div>
+                    </button>
+                    <button class="menu-button">
+                        Edit
+                        <img src="./images/edit-icon.svg" alt="edit icon" class="menu-icon">
+                    </button>
+                    <button class="menu-button">
+                        Stats
+                        <img src="./images/stats-icon.svg" alt="stats icon" class="menu-icon">
+                    </button>
+                    <button class="menu-button js-account-menu-logout-button">
+                        Logout
+                        <img src="./images/logout-icon.svg" alt="logout icon" class="menu-icon">
+                    </button>
                 </div>
             </div>
             <div class="auth-menu js-auth-menu">
-                <button class="auth-back-button js-sign-in-back-button">Back</button>
+                <button class="menu-back-button js-sign-in-back-button">
+                        <img src="./images/left-arrow.svg" alt="Back" class="menu-back-arrow-icon">
+                </button>
                 <div class="sign-in-form">
                     <div class="form-content">
                         <h1>Sign in</h1>
@@ -79,7 +145,9 @@
                     </div>
                 </div>
                 <div class="sign-up-form js-sign-up-form-window">
-                    <button class="auth-back-button js-sign-up-back-button">Back</button>
+                    <button class="menu-back-button js-sign-up-back-button">
+                        <img src="./images/left-arrow.svg" alt="Back" class="menu-back-arrow-icon">
+                    </button>
                     <div class="form-content">
                         <h1>Sign up</h1>
                         <form action="#" class="form-style js-sign-up-form">

@@ -25,10 +25,23 @@ export class AuthManager {
                     body: JSON.stringify(data)
                 });
 
-                console.log(await JSON.parse(response));
+
+                let messageType = "message";
+
+                const responseData = await response.json();
+
+                if (!response.ok) {
+                    messageType = "error";
+                    this.hud.menuManager.displaySignInMessageBlock(responseData.message, messageType);
+                } else {
+                    localStorage.setItem("token", responseData.token);
+                    this.hud.menuManager.hideSignInForm();
+                    this.hud.menuManager.checkAuthAndDisplayMenu();
+                }
 
             } catch(err) {
                 console.log(err);
+                this.hud.menuManager.displaySignInMessageBlock("Unable to connect to server. Try again later.", "error");
             }
 
         });
@@ -58,6 +71,7 @@ export class AuthManager {
                 } else {
                     this.hud.menuManager.displaySignInMessageBlock((await response.json()).message, messageType);
                     this.signUpForm.reset();
+                    this.signInForm.reset();
                     this.hud.menuManager.hideSignUpForm();    
                 }
 

@@ -1,12 +1,12 @@
 .hud-menu {
     position: absolute;
-    top: 25px;
+    top: -55px;
     left: 150px;
-    width: 300px;
-    height: 500px;
+    width: 312px;
+    height: 600px;
     z-index: 100;
     display: grid;
-    grid-template-rows: 2fr 1fr;
+    grid-template-rows: 2fr 1.8fr;
     gap: 8px;
     padding: 6px 6px;
 }
@@ -26,6 +26,10 @@
 }
 
 .menu-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 1.5rem;
     border: none;
     width: 100%;
@@ -47,7 +51,8 @@
 .menu-image,
 .menu-button,
 .hud-menu,
-.post-game-stats {
+.post-game-stats,
+.nickname-div {
     border-radius: 10px;
 }
 
@@ -55,10 +60,18 @@
     background-color: rgb(17, 85, 204);
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
-.menu-food-img {
+
+.image-score-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.menu-stats-img {
     width: 100px;
     height: 100px;
 }
@@ -68,4 +81,40 @@
     align-items: center;
     color: white;
     font-size: 2rem;
+}
+
+.menu-sign-in-button {
+    display: none;
+}
+
+.player-account-button {
+    display: none;
+}
+
+.account-avatar {
+    object-fit: cover;
+    object-position: center;
+    border-radius: 25px;
+}
+
+.account-three-dots-icon,
+.account-avatar,
+.menu-back-arrow-icon {
+    height: 40px;
+    width: 40px;
+}
+
+.account-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.menu-back-button {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    background-color: rgb(17, 85, 204);
+    border: none;
+    cursor: pointer;
 }

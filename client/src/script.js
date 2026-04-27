@@ -40,8 +40,7 @@ function animation(timeStamp = 0) {
             if (game.timer >= game.interval) {
                 game.isRun = false;
                 setTimeout(() => {
-                    game.apiService.sendScore();
-                    game.hud.displayMenu();
+                    game.doAfterGameEnds();
                 }, 1000);
 
             }
