@@ -8,6 +8,7 @@ export class HUD {
         this.authManager = new AuthManager(this);
         this.menuManager = new MenuManager(this, this.game);
         
+        this.hudBar = document.querySelector(".js-hud-bar");
         this.hudBarScore = document.querySelector(".js-hud-bar-score");
         this.hudBarBestScore = document.querySelector(".js-hud-bar-best-score");
 
@@ -67,9 +68,7 @@ export class HUD {
             this.hudBarBestScore.textContent = this.game.score;
             this.menuManager.loadBestScore(this.game.score);
 
-            if (isAuth) {
-                this.game.userService.setBestScore(this.game.score);
-            } else {
+            if (!isAuth) {
                 localStorage.setItem("bestScore", String(this.game.score));
             }
         }
@@ -78,6 +77,10 @@ export class HUD {
     loadReguralAndBestScore() {
         this.resetScore();
         this.loadBestScore();
+    }
+
+    applyStyle(style) {
+        this.hudBar.style.backgroundColor = style;
     }
 
     

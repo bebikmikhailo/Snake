@@ -6,12 +6,17 @@ import { MAP_HEIGHT } from '../script.js';
 import { CELL_SIZE } from '../script.js';
 
 export class FoodManager {
-    constructor(game) {
+    constructor(game, foodClass) {
         this.game = game;
         this.food = [];
         this.foodLimit = FOOD_LIMIT;
+        this.foodClass = foodClass;
     }
 
+
+    setFoodClass(foodClass) {
+        this.foodClass = foodClass;
+    }
 
     //drows food
     draw(context) {
@@ -22,19 +27,15 @@ export class FoodManager {
 
     // generates food
     update() {
-        this.generateFood("Apple");
+        this.generateFood();
     }
 
 
-    generateFood(foodType) {
+    generateFood() {
         while (!this.isEnoughFoodOnMap() && this.game.board.hasAvailableSpace()) {
             const foodSegment = Segment.getRandomSegment(MAP_WIDTH, MAP_HEIGHT, CELL_SIZE);
             if (!this.game.snake.isColidesWithSnake(foodSegment) && !this.isSegmentColideFood(foodSegment)) {
-                switch(foodType) {
-                    case "Apple":
-                        this.food.push(new Apple(foodSegment, 0.6));
-                        break;
-                }
+                this.food.push(this.foodClass.getInstance(foodSegment, 0.6));
             }
         }
 

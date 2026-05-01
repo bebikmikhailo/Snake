@@ -1,11 +1,15 @@
 import { AccountMenuManager } from "./AccountMenuManager.js";
 import { getUsernameFromJWT, checkAuth } from "../utils/utils.js";
+import { LeaderboardPage } from "./LeaderboardPage.js";
+import { SettingsPage } from "./SettingsPage.js";
 
 export class MenuManager {
     constructor(hud, game) {
         this.hud = hud;
         this.game = game;
-        this.accountMenuManager = new AccountMenuManager(hud);
+        this.accountMenuManager = new AccountMenuManager(hud, game);
+        this.leaderboardPage = new LeaderboardPage();
+        this.settingsPage = new SettingsPage(this, game);
 
         this.restartMenu = document.querySelector(".js-hud-menu");
         this.globalOverlay = document.querySelector(".js-global-overlay");
@@ -22,7 +26,6 @@ export class MenuManager {
 
         this.menuSignInButton = document.querySelector(".js-menu-sign-in-button");
         this.menuPlayerAccountButton = document.querySelector(".js-player-account-button");
-        this.accountMenu = document.querySelector(".js-account-menu");
 
         this.initEventListeners();
     }
@@ -68,6 +71,15 @@ export class MenuManager {
         this.menuPlayerAccountButton.addEventListener("click", () => {
             this.hideMenuWithoutOverlay();
             this.displayAccountMenu();
+        });
+
+        document.querySelector(".js-menu-leaderboard-button").addEventListener("click", () => {
+            this.leaderboardPage.displayLeaderboardPage();
+        });
+
+        document.querySelector(".js-menu-settings-button").addEventListener("click", () => {
+            this.hideMenuWithoutOverlay();
+            this.settingsPage.displayPage();
         });
     }
 
@@ -173,8 +185,7 @@ export class MenuManager {
     }    
 
     displayAccountMenu() {
-        document.querySelector(".js-account-userrname").textContent = getUsernameFromJWT();
-        this.accountMenu.style.display = "grid";
+        this.accountMenuManager.displayAccountMenu();
     }
 
     resetScore() {

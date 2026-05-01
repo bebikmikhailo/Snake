@@ -15,11 +15,25 @@ export class Snake {
         this.xSpeed = 0;
         this.ySpeed = 0;
         this.body = [
-                    new Segment(CELL_SIZE * 4, CELL_SIZE * 8),
-                    new Segment(CELL_SIZE * 3, CELL_SIZE * 8),
-                    new Segment(CELL_SIZE * 2, CELL_SIZE * 8)
-                ];
-        this.sprite = new SnakeSprite(this, 560, 0.45); // 400 - orange 280 - purple
+
+            new Segment(CELL_SIZE * 4, CELL_SIZE * 8),
+            new Segment(CELL_SIZE * 3, CELL_SIZE * 8),
+            new Segment(CELL_SIZE * 2, CELL_SIZE * 8)
+        ];
+        this.sprite = new SnakeSprite(this, 200, 100, 0.45);
+        this.moveDirection = "Right";
+    }
+
+    reset() {
+        this.xSpeed = 0;
+        this.ySpeed = 0;
+        this.body = [
+
+            new Segment(CELL_SIZE * 4, CELL_SIZE * 8),
+            new Segment(CELL_SIZE * 3, CELL_SIZE * 8),
+            new Segment(CELL_SIZE * 2, CELL_SIZE * 8)
+        ];
+        this.sprite.reset();
         this.moveDirection = "Right";
     }
 
@@ -37,6 +51,7 @@ export class Snake {
         const postChangeHeadClone = this.body[0].clone();
 
         if (this.checkHeadColisionWithBody() || this.checkColisionWithMap())  {
+            this.game.soundManager.playSnakeColideSound();
             this.body[0] = preChangeHeadClone;
             this.colideAnimation();
             this.game.isGameEnding = true;
@@ -62,6 +77,7 @@ export class Snake {
 
         // this.body[0] is snake's head and I check weather snake's head colides with food or not
         if (this.game.foodManager.isFoodEaten(this.body[0])) {
+            this.game.soundManager.playAppleCrunchSound();
             this.game.score++;
             this.grow();
             this.increaseSpeed();
@@ -88,21 +104,25 @@ export class Snake {
         const lastKeyPressed = this.game.listner.getLastPressedKey();
 
         if (lastKeyPressed === "w" && this.moveDirection !== "Down") {
+            this.game.soundManager.playSnakeMoveForwardSound();
             this.moveDirection = "Up";
             this.ySpeed = -this.speed;
             this.xSpeed = 0;
         }
         else if (lastKeyPressed === "s" && this.moveDirection !== "Up") {
+            this.game.soundManager.playSnakeMoveBackwardSound();
             this.moveDirection = "Down";
             this.ySpeed = this.speed;
             this.xSpeed = 0;
         }
         else if(lastKeyPressed === "d" && this.moveDirection !== "Left") {
+            this.game.soundManager.playSnakeMoveRightSound();
             this.moveDirection = "Right";
             this.xSpeed = this.speed;
             this.ySpeed = 0;
         }   
         else if(lastKeyPressed === "a" && this.moveDirection !== "Right") {
+            this.game.soundManager.playSnakeMoveLeftSound();
             this.moveDirection = "Left";
             this.xSpeed = -this.speed;
             this.ySpeed = 0;
@@ -167,5 +187,9 @@ export class Snake {
         this.sprite.head = this.body[this.body.length - 1];
         this.sprite.tail = this.body[0];
 
+    }
+
+    applyStyle(style) {
+        this.sprite.applyStyle(style);
     }
  }

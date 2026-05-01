@@ -34,5 +34,10 @@ export class Board {
                                     this.game.foodManager.food.length);
     }
 
+    applyStyle(style) {
+        this.lightColor = style.secondary;
+        this.darkColor = style.primary;
+    }
+
 
 }

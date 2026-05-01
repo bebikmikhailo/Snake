@@ -1,10 +1,16 @@
 import { CELL_SIZE } from '../script.js';
 
 export class SnakeSprite {
-    constructor(snake, color, size) {
+    constructor(snake, color, saturation, size) {
         this.snake = snake;
         this.color = color;
+        this.saturation = saturation;
         this.size = size;
+        this.head = null;
+        this.tail = null;
+    }
+
+    reset() {
         this.head = null;
         this.tail = null;
     }
@@ -55,7 +61,7 @@ export class SnakeSprite {
     }
 
     drawBody(context, progress) {
-        context.strokeStyle = `hsl(${this.color}, 100%, 50%)`;
+        context.strokeStyle = `hsl(${this.color}, ${this.saturation}%, 50%)`;
         context.lineCap = "round";
         context.lineJoin = "round";
         context.lineWidth = (CELL_SIZE * 1.7) * this.size;
@@ -102,7 +108,7 @@ export class SnakeSprite {
         
 
         context.beginPath();
-        context.fillStyle = `hsl(${this.color}, 100%, 50%)`;
+        context.fillStyle = `hsl(${this.color}, ${this.saturation}%, 50%)`;
         context.arc(0, 0, (CELL_SIZE * 1.3), 0, 2 * Math.PI);
         context.fill();
 
@@ -116,14 +122,14 @@ export class SnakeSprite {
 
 
         context.beginPath();
-        context.fillStyle = `hsl(${this.color}, 100%, 20%)`;
+        context.fillStyle = `hsl(${this.color}, ${this.saturation}%, 20%)`;
         context.arc(-10, 45, 20, 0, 2 * Math.PI);
         context.arc(-10, -45, 20, 0, 2 * Math.PI);
         context.fill();
 
 
         context.beginPath();
-        context.fillStyle = `hsl(${this.color}, 100%, 30%)`;
+        context.fillStyle = `hsl(${this.color}, ${this.saturation}%, 30%)`;
         context.arc(50, 20, 5, 0, 2 * Math.PI);
         context.arc(50, -20, 5, 0, 2 * Math.PI);
         context.fill();
@@ -163,6 +169,11 @@ export class SnakeSprite {
         }
 
         return angle;
+    }
+
+    applyStyle(style) {
+        this.color = style.color;
+        this.saturation = style.saturation;
     }
 
 }

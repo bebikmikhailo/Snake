@@ -8,4 +8,8 @@ export class Food {
     draw(context) {
         throw new Error("draw() is abstract method of Food class")
     }
+
+    static getInstance(...args) {
+        return new this(...args);
+    }
 }

@@ -51,5 +51,4 @@ export class Apple extends Food{
         context.fill();
         context.closePath();
     }
-
 }

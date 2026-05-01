@@ -1,4 +1,5 @@
 .account-menu {
+    color: white;
     display: none;
     position: absolute;
     top: -55px;
@@ -6,7 +7,7 @@
     width: 312px;
     height: 600px;
     z-index: 102;
-    grid-template-rows: 2fr 1.8fr;
+    grid-template-rows: 2fr 1fr;
     gap: 8px;
     padding: 6px 6px;
 }
@@ -18,8 +19,16 @@
 }
 
 .account-avatar-name-container {
+    font-size: 24px;
     display: flex;
+    flex-direction: column;
     align-items: center;
+    row-gap: 20px;
+}
+
+.account-profile-avatar {
+    width: 100px;
+    height: 100px;
 }
 
 .account-name-div {
@@ -29,6 +38,9 @@
 
 .account-free-space {
     border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .account-free-space {
