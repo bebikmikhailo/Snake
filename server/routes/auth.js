@@ -4,7 +4,6 @@ const router = express.Router();
 
 
 router.post('/sign-in', authController.authorizeUser);
-
 router.post('/sign-up', authController.createUser);
 
 module.exports = router;

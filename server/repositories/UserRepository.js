@@ -28,12 +28,10 @@ class UserRepository {
         }
     }
 
-    async getUserByEmail(email) {
+    async get(query, params) {
         try {
-            const result = await db.query(`
-            SELECT * FROM users WHERE email = ?
-            `, [email]);
 
+            const result = await db.query(query, params);
             return result[0][0];
 
         } catch (err) {
@@ -41,26 +39,84 @@ class UserRepository {
         }
     }
 
-    async getUserBestScoreById(id) {
+    async getWithoutUnpack(query, params) {
         try {
-            const result = await db.query(`
-                SELECT best_score FROM statistics
-                WHERE user_id = ?
-            `, [id]);
 
-            return result[0][0].best_score;
+            const result = await db.query(query, params);
+            return result[0];
+
+        } catch (err) {
+            throw  err;
+        }
+    }
+
+    async getUserByEmail(email) {
+        try {
+            return await this.get("SELECT * FROM users WHERE email = ?", [email]);
         } catch(err) {
             throw err;
         }
     }
 
-    async setUserBestScoreById(id, bestScore) {
+    async getUserBestScoreById(id) {
         try {
-            await db.query(`
-                UPDATE statistics 
-                SET best_score = ? 
-                WHERE user_id = ? AND best_score < ?
-            `, [bestScore, id, bestScore]);
+
+            return (await this.get(`
+                SELECT best_score FROM statistics
+                WHERE user_id = ?
+            `, [id])).best_score;
+
+        } catch(err) {
+            throw err;
+        }
+    }
+
+    async getUserStatisticById(id) {
+        try {
+
+            return await this.get(`
+                SELECT games_count, total_eaten_food_count, best_score, last_game_at FROM statistics
+                WHERE user_id = ?`, [id]);
+                
+        } catch(err) {
+            throw err;
+        }
+    }
+
+    async getBestPlayersByScore(number) {
+        try {
+
+            return await this.getWithoutUnpack(`
+                SELECT t1.user_name, s.best_score
+                FROM statistics s
+                LEFT JOIN users t1 ON s.user_id = t1.id
+                ORDER BY s.best_score DESC
+                LIMIT ?;
+            `, [Number(number)]);
+        } catch(err) {
+            throw err;
+        }
+    }
+
+
+    async save(query, params) {
+        try {
+            await db.query(query, params);
+        } catch(err) {
+            throw err;
+        }
+    }
+
+    async saveUserStatistic(id, user) {
+        try {
+            await this.save(`
+                UPDATE statistics
+                SET games_count = ?,
+                total_eaten_food_count = ?,
+                best_score = ?
+                WHERE user_id = ?
+            `, [user.games_count, user.total_eaten_food_count, user.best_score, id]);
+
         } catch(err) {
             throw err;
         }

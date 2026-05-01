@@ -28,7 +28,7 @@ exports.authenticateToken = async (req, res, next) => {
 exports.getBestScore = async (req, res) => {
     try {
         const bestScore = await userRepo.getUserBestScoreById(req.user.id);
-        res.status(200).json({ bestScore: `${bestScore}`});
+        res.status(200).json({ bestScore });
     } catch(err) {
         console.log(err);
         res.status(500).json({ message: "Something went wrong on the server"});
@@ -43,5 +43,35 @@ exports.setBestScore = async (req, res) => {
     } catch(err) {
         console.log(err);
         res.status(500).json({ message: "Something went wrong on the server"});
+    }
+}
+
+exports.getStatistic = async (req, res) => {
+    try {
+        const statistic = await userRepo.getUserStatisticById(req.user.id);
+        res.status(200).json({ statistic });
+    } catch(err) {
+        console.log(err);
+        res.status(500).json({ message: "Something went wrong on the server" });
+    }
+}
+
+exports.saveStatistic = async (req, res) => {
+    try {
+        await userRepo.saveUserStatistic(req.user.id, req.body.data);
+        res.status(200);
+    } catch(err) {
+        console.log(err);
+        res.status(500).json({ message: "Something went wrong on the server" });
+    }
+}
+
+exports.getBestPlayersByScore = async (req, res) => {
+    try {
+        const players = await userRepo.getBestPlayersByScore(req.query.number);
+        res.status(200).json({ players });
+    } catch(err) {
+        console.log(err);
+        res.status(500).json({ message: "Something went wrong on the server" });
     }
 }
