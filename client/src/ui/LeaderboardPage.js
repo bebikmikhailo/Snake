@@ -34,7 +34,7 @@ export class LeaderboardPage {
             <div class="content-item">
                 <span>${count++}</span>
                 <div class="table-avatar-username-conteiner">
-                    <img src="./assets/images/default-avatar.webp" alt="avatar" class="table-avatar">
+                    <img src="${this.userService.getAvatarProperPath(player.user_avatar)}" alt="avatar" class="table-avatar">
                     <span class="table-username">${player.user_name}</span>
                 </div>
                 <span>${player.best_score}</span>

@@ -1,10 +1,6 @@
-require("dotenv").config();
-
 const bcrypt = require("bcrypt");
 const userRepo = require("../repositories/UserRepository.js");
-const jwt = require("jsonwebtoken");
-
-const SECRET_KEY = process.env.JWT_SECRET;
+const utils = require("../utils.js");
 
 
 exports.createUser = async (req, res) => {
@@ -44,11 +40,7 @@ exports.authorizeUser = async (req, res) => {
     
             if (isPasswordMatch) {
 
-                const token = jwt.sign(
-                    { id: user.id, userName: user.user_name },
-                    SECRET_KEY,
-                    { expiresIn: "1d" }
-                )
+                const token = utils.createJWT(user.id, user.user_name, "1d");
 
                 res.status(200).json({
                     message: "User has successfully authorized!",

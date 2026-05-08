@@ -87,12 +87,24 @@ class UserRepository {
         try {
 
             return await this.getWithoutUnpack(`
-                SELECT t1.user_name, s.best_score
+                SELECT t1.user_name, t1.user_avatar, s.best_score
                 FROM statistics s
                 LEFT JOIN users t1 ON s.user_id = t1.id
                 ORDER BY s.best_score DESC
                 LIMIT ?;
             `, [Number(number)]);
+        } catch(err) {
+            throw err;
+        }
+    }
+
+    async getAvatar(id) {
+        try {
+            return await this.get(`
+                SELECT user_avatar
+                FROM users
+                WHERE id = ?
+            `, [id]);
         } catch(err) {
             throw err;
         }
@@ -116,6 +128,34 @@ class UserRepository {
                 best_score = ?
                 WHERE user_id = ?
             `, [user.games_count, user.total_eaten_food_count, user.best_score, id]);
+
+        } catch(err) {
+            throw err;
+        }
+    }
+
+    async saveUsername(id, username) {
+        try {
+
+            await this.save(`
+                UPDATE users
+                SET user_name = ?
+                WHERE id = ?
+            `, [username, id]);
+
+        } catch(err) {
+            throw err;
+        }
+    }
+
+    async saveAvatar(id, avatarPath) {
+        try {
+
+            await this.save(`
+                UPDATE users
+                SET user_avatar = ?
+                WHERE id = ?
+            `, [avatarPath, id]);
 
         } catch(err) {
             throw err;

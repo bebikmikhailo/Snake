@@ -23,6 +23,7 @@ export class MenuManager {
         this.signInMessageText = document.querySelector(".js-sign-in-message-block .js-message-text");
         this.signUpMessageBlock = document.querySelector(".js-sign-up-message-block");
         this.signUpMessageText = document.querySelector(".js-sign-up-message-block .js-message-text");
+        this.menuAccountAvatar = document.querySelector(".js-menu-account-avatar");
 
         this.menuSignInButton = document.querySelector(".js-menu-sign-in-button");
         this.menuPlayerAccountButton = document.querySelector(".js-player-account-button");
@@ -162,7 +163,9 @@ export class MenuManager {
         this.hidePlayerAccountButton();
         if (checkAuth()) {
             this.displayPlayerAccountButton();
+            this.setAvatar();
             document.querySelector(".js-account-username").textContent = getUsernameFromJWT();
+            document.querySelector(".js-account-menu-username").textContent = getUsernameFromJWT();
         } else {
             this.displayAuthButtons();
         }
@@ -194,5 +197,11 @@ export class MenuManager {
 
     loadBestScore(bestScore) {
         this.menuBestScore.textContent = bestScore;
+    }
+
+    async setAvatar() {
+        const avatarPath = localStorage.getItem("avatarPath") || await this.game.userService.getAvatar();
+        this.menuAccountAvatar.src = avatarPath;
+        this.accountMenuManager.setAvatar(avatarPath);
     }
 }

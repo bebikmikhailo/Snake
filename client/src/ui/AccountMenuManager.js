@@ -1,5 +1,6 @@
 import { getUsernameFromJWT } from "../utils/utils.js";
 import { StatisticPage } from "./StatisticPage.js";
+import { EditAccountPage } from "./EditAccountPage.js";
 
 export class AccountMenuManager {
     constructor(hud, game) {
@@ -7,9 +8,12 @@ export class AccountMenuManager {
         this.game = game;
 
         this.statisticPage = new StatisticPage();
+        this.editAccountPage = new EditAccountPage(this);
 
         this.accountMenu = document.querySelector(".js-account-menu");
         this.statsPage = document.querySelector(".js-stats-page");
+
+        this.accountAvatar = document.querySelector(".js-profile-account-avatar");
         this.initEventListeners();
     }
 
@@ -33,6 +37,11 @@ export class AccountMenuManager {
             this.hideStatsPage();
             this.displayAccountMenu();
         });
+
+        document.querySelector(".js-account-menu-edit-profile-button").addEventListener("click", () => {
+            this.hideAccountMenu();
+            this.editAccountPage.displayPage();
+        });
     }
 
     hideAccountMenu() {
@@ -40,7 +49,7 @@ export class AccountMenuManager {
     }
 
     displayAccountMenu() {
-        document.querySelector(".js-account-userrname").textContent = getUsernameFromJWT();
+        document.querySelector(".js-account-menu-username").textContent = getUsernameFromJWT();
         this.accountMenu.style.display = "grid";
     }
 
@@ -52,6 +61,7 @@ export class AccountMenuManager {
     unauthorizeUser() {
         localStorage.removeItem("token");
         localStorage.removeItem("bestScore");
+        localStorage.removeItem("avatarPath");
         this.hud.menuManager.setUserInfo();
         this.hud.loadReguralAndBestScore();
     }
@@ -68,6 +78,11 @@ export class AccountMenuManager {
     async loadAccountStatistic() {
         const user = await this.game.userService.getStatistic();
         this.statisticPage.loadStatistic(user);
+    }
+
+    setAvatar(avatarPath) {
+        this.accountAvatar.src = avatarPath;
+        this.editAccountPage.setAvatar(avatarPath);
     }
 
 

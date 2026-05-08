@@ -48,10 +48,28 @@ export class UserService {
         return (await this.getWithOutToken(`users/best-players?number=${number}`)).players;
     }
 
+    async getAvatar() {
+        const avatarPath = (await this.get("user/avatar")).user_avatar;
+
+        if (!avatarPath) {
+            return CONFIG.DEFAULT_AVATAR_PATH;
+        }
+
+        return `${CONFIG.API_BASE_URL}${avatarPath}`; 
+    }
+
+    getAvatarProperPath(avatar) {
+        if (!avatar) {
+            return CONFIG.DEFAULT_AVATAR_PATH;
+        }
+
+        return `${CONFIG.API_BASE_URL}${avatar}`;
+    }
+
     
     async post(data, path) {
         const token = localStorage.getItem("token");
-        const response = await fetch(`${CONFIG.API_BASE_URL}/api/user/${path}`, {
+        const response = await fetch(`${CONFIG.API_BASE_URL}/api/${path}`, {
             method: "POST",
             headers: {
                 "Authorization": `Bearer ${token}`,
@@ -62,6 +80,27 @@ export class UserService {
         
         if (!response.ok) {
             console.log("Error saving data on the server");
+        }
+
+        const result = await response.json()
+        return result;
+    }
+
+    async postWithoutContentType(data, path) {
+        const token = localStorage.getItem("token");
+        const response = await fetch(`${CONFIG.API_BASE_URL}/api/${path}`, {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            },
+            body: data
+        });
+        
+        if (!response.ok) {
+            console.log("Error saving data on the server");
+        } else {
+            const result = await response.json()
+            return result;
         }
     }
 
@@ -78,6 +117,17 @@ export class UserService {
             best_score
         };
     
-        this.post(result, "statistic");
+        this.post(result, "user/statistic");
+    }
+
+    async saveUsername(username) {
+        return await this.post(username, "user/username");
+    }
+
+    async saveAvatar(avatar) {
+        const formData = new FormData();
+        formData.append('avatar', avatar);
+
+        return (await this.postWithoutContentType(formData, "user/avatar")).user_avatar;
     }
 }

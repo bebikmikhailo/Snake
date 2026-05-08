@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="styles/stats-page.css">
     <link rel="stylesheet" href="styles/leaderboard-page.css">
     <link rel="stylesheet" href="styles/settings-page.css">
+    <link rel="stylesheet" href="styles/edit-profile-page.css">
 </head>
 <body>
 
@@ -74,7 +75,7 @@
                     </button>
                     <button class="menu-button player-account-button js-player-account-button">
                         <div class="account-button-container">
-                            <img src="./assets/images/default-avatar.webp" alt="avatar" class="account-avatar">
+                            <img src="./assets/images/default-avatar.webp" alt="avatar" class="account-avatar js-menu-account-avatar">
                             <div class="js-account-username"></div>
                             <img src="./assets/images/three-dots-icon.svg" alt="three dots icon" class="account-three-dots-icon">
                         </div>
@@ -149,18 +150,12 @@
                         <img src="./assets/images/left-arrow.svg" alt="Back" class="menu-back-arrow-icon">
                     </button>
                     <div class="account-avatar-name-container">
-                        <img src="./assets/images/default-avatar.webp" alt="avatar" class="account-avatar account-profile-avatar">
-                        <div class="account-name-div js-account-userrname"></div>
+                        <img src="./assets/images/default-avatar.webp" alt="avatar" class="account-avatar account-profile-avatar js-profile-account-avatar">
+                        <div class="account-name-div js-account-menu-username"></div>
                     </div>
                 </div>
                 <div class="menu-buttons-container">
-                    <!-- <button class="menu-button account-avatar-name js-player-account-button">
-                        <div class="account-avatar-name-container">
-                            <img src="./assets/images/default-avatar.webp" alt="avatar" class="account-avatar">
-                            <div class="account-name-div js-account-userrname"></div>
-                        </div>
-                    </button> -->
-                    <button class="menu-button">
+                    <button class="menu-button js-account-menu-edit-profile-button">
                         Edit
                         <img src="./assets/images/edit-icon.svg" alt="edit icon" class="menu-icon">
                     </button>
@@ -174,9 +169,43 @@
                     </button>
                 </div>
             </div>
+            <div class="edit-account-page js-edit-account-page">
+                <button class="edit-account-back-button js-edit-account-page-back-button">
+                    <img src="./assets/images/left-arrow.svg" alt="Back" class="menu-back-arrow-icon">
+                </button>
+                <div class="edit-account-page-content"> 
+                    <div class="edit-data-container">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" class="js-edit-username-input">
+                    </div>
+                    <div class="edit-avatar-container">
+                        <div class="avatars-container">
+                            <div>Avatar</div>
+                            <div>
+                                <img src="./assets/images/default-avatar.webp" alt="#" class="preview-avatar-image-64x64 js-preview-avatar-64x64">
+                                <img src="./assets/images/default-avatar.webp" alt="#" class="preview-avatar-image-40x40 js-preview-avatar-40x40">
+                            </div>
+                        </div>
+                        <div class="upload-avatar-button-container">
+                            <input type="file" id="avatar-input" accept="image/png, image/jpeg, image/jpg" hidden class="js-avatar-input">
+                            <label for="avatar-input" class="edit-account-button upload-avatar-button">Upload avatar</label>
+                            <div>Upload avatar from your device.</div>
+                        </div>
+                    </div>
+                    <button class="edit-account-button edit-account-save-button js-edit-account-save-button">Save</button>
+                    <div class="block error js-edit-page-message-block">
+                        <span class="js-message-text"></span>
+                        <button class="close-message-button js-edit-page-close-message-button">X</button>
+                    </div>
+                    <div class="edit-data-container">
+                        <div>Password</div>
+                        <button class="edit-account-button edit-account-change-password-button">Change password</button>
+                    </div>
+                </div>
+            </div>
             <div class="stats-page js-stats-page">
                 <button class="menu-back-button js-stats-page-back-button">
-                        <img src="./assets/images/left-arrow.svg" alt="Back" class="menu-back-arrow-icon">
+                    <img src="./assets/images/left-arrow.svg" alt="Back" class="menu-back-arrow-icon">
                 </button>
                 <h1>Statistic</h1>
                 <div class="statistic-container">

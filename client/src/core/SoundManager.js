@@ -2,7 +2,7 @@ export class SoundManager {
     constructor() {
         this.soundsPath = "assets/sounds/";
         this.appleCrunch = new Audio(`${this.soundsPath}apple-crunch1-200.mp3`);
-        this.snakeMove = new Audio(`${this.soundsPath}goida-100.mp3`);
+        this.snakeMove = new Audio(`${this.soundsPath}do-the-second.mp3`);
         this.snakeColide = new Audio(`${this.soundsPath}gunshot-quicker.mp3`);
         this.snakeMoveW = new Audio(`${this.soundsPath}c-note-sound.mp3`);
         this.snakeMoveA = new Audio(`${this.soundsPath}do-the-second.mp3`);
