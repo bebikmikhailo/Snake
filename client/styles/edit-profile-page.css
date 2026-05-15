@@ -41,11 +41,13 @@
 }
 
 .preview-avatar-image-64x64 {
+    object-fit: cover;
     width: 64px;
     height: 64px;
 }
 
 .preview-avatar-image-40x40 {
+    object-fit: cover;
     width: 40px;
     height: 40px;
 }
